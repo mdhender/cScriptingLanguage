@@ -1,0 +1,309 @@
+<html><head><title>CSL Reference&nbsp-&nbsp;Embedding CSL</title>
+<meta name="description" content="Embedding CSL">
+<meta name="keywords" content="PROGRAMMING CSL C SCRIPT SCRIPTING LANGUAGE IBK ORACLE MYSQL DB2 ODBC VISUALAGE BORLAND VISUAL C++ GCC">
+</head>
+<body leftmargin="10" topmargin="2"
+text="#000000" bgcolor="#FFFFFF" link="#002288" vlink="#444444" alink="#FF2200">
+<div align="center">
+<a name="top"></a>
+<!-- upper -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="150">
+<a href="index.htm"><img src="../img/csl.png" width="97" height="56" border="0"></a>
+</td>
+<td width="300%" align="center" valign="bottom">
+<h1>Embedding CSL</h1>
+</td>
+<td width="150" align="right">
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td nowrap align="right" valign="top"><font size="-2"><b>
+C&nbsp;Scripting&nbsp;Language<br>
+Reference&nbsp;Manual<br>
+Version&nbsp;4.4.0<br></b>
+<br>&lt;&lt;&nbsp;<a href="capi1.htm">Back</a>&nbsp;&nbsp;<a href="#end">End</a>&nbsp;&nbsp;<a href="capi3.htm">Next</a>&nbsp;&gt;&gt;<br>
+</font>
+</td></tr>
+</table>
+</td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- left column -->
+<tr valign="top">
+<td></td>
+<td>&nbsp;</td>
+<td bgcolor="#E0E0E0" width="150">
+<table cellspacing="0" cellpadding="2" border="0" width="100%">
+<tr>
+<td nowrap bgcolor="#0044AA"><b><font color="#FFFFFF">INDEX</font></b></td>
+</tr>
+<tr>
+<td nowrap><font size="-1">
+<a href="intro1.htm">Introduction</a><br>
+<a href="inst1.htm">Installation</a><br>
+<a href="using1.htm">Using the CSL executive</a><br>
+<a href="lang1.htm">Language</a><br>
+<a href="direct1.htm">Directives</a><br>
+<a href="sys1.htm">System library</a><br>
+<a href="str1.htm">String library</a><br>
+<a href="math1.htm">Math library</a><br>
+<a href="rex1.htm">Regular expression lib.</a><br>
+<a href="file1.htm">File library</a><br>
+<a href="dax1.htm">Database library</a><br>
+<a href="comm1.htm">Async Communication</a><br>
+<a href="prf1.htm">Registry/Profile handling</a><br>
+<a href="win1.htm">Windows control</a><br>
+<a href="capi1.htm">C API</a><br>
+&nbsp;&nbsp;&nbsp;<a href="capi2.htm">Embedding CSL</a><br>
+&nbsp;&nbsp;&nbsp;<a href="capi3.htm">Writing libraries</a><br>
+&nbsp;&nbsp;&nbsp;<a href="capi41.htm">API reference</a><br>
+<a href="api1.htm">C++ Class Interface</a><br>
+<a href="link1.htm">CSL links</a><br>
+</font></td>
+</tr>
+</table>
+</td>
+<!-- main column -->
+<td>&nbsp;&nbsp;</td>
+<td width="300%">
+<p>
+Embedding CSL in your application is quite easy: After opening a CSL
+handle the API functions can be used to compile scripts, define
+and call functions, query and set variables and so on.
+</p><p>
+Have a look at this example making use of various API functions.
+You will find it as <i>Embed.c</i> in the <i>Samples\API\Source</i>
+directory:
+</p><pre>
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;ZCslApi.h&gt;
+&nbsp;
+static char* module = &quot;Embed&quot;;    /* module name */
+static ZCslHandle csl;             /* csl handle */
+static long errs;                  /* csl api return code */
+&nbsp;
+/*
+ * c h e c k E r r s
+ *
+ * This function checks for errors. Error messages are in case displayed
+ * and program is terminated to keep the sample as simple as possible.
+ */
+static void checkErrs(void)
+{
+   long size, errs2;
+   int i;
+   char *msg;
+&nbsp;
+   if (errs) {
+      fprintf(stderr, &quot;ZCsl error found:\r\n&quot;);
+      for (i = 0; i &lt; errs; i++) {
+         /* First we get the size of the message only so a buffer */
+         /* large enough for the string can be allocated: */
+         errs2 = ZCslGetError(csl, i, 0, &size); /* get size of message */
+         if (errs2) { errs = errs2; checkErrs();  }
+&nbsp;
+         /* Now a buffer is allocated and the message is retrieved */
+         /* and displayed: */
+         msg = (char*)malloc(size);
+         errs2 = ZCslGetError(csl, i, msg, &size); /* get message */
+         if (errs2) { errs = errs2; checkErrs();  }
+         fprintf(stderr, &quot;%s\r\n&quot;, msg);
+&nbsp;
+         /* the buffer is no longer required and gets discarded: */
+         free(msg);
+      } /* for */
+      exit(1);
+   } /* if */
+} /* checkErrs */
+&nbsp;
+/*
+ * c h e c k N u m b e r
+ *
+ * Check if string represents a number
+ */
+static int checkNumber(char *s)
+{
+   int any;
+&nbsp;
+   any = 0;
+   if (*s=='-' || *s=='+') s++;
+   while ('0'&lt;=*s && *s&lt;='9') { s++; any = 1; }
+   if (*s=='.') s++;
+   while ('0'&lt;=*s && *s&lt;='9') s++;
+   return any && *s == 0;
+} /* checkNumber */
+&nbsp;
+/*
+ * a v e r a g e
+ *
+ * Sample CSL function calculating the average of up 5 numbers
+ */
+ZExportAPI(void) average(ZCslHandle aCsl)
+{
+   int argCount, i;
+   long bufsiz;
+   double sum;
+   char buf[40], name[4];
+&nbsp;
+   /* get actual # of arguments */
+   bufsiz = sizeof(buf);
+   ZCslGet(aCsl, &quot;argCount&quot;, buf, &bufsiz);
+   argCount = atoi(buf);
+&nbsp;
+   /* calculate sum of all arguments */
+   sum = 0.0;
+   for (i = 0; i &lt; argCount; i++) {
+      /* create name of parameter */
+      sprintf(name, &quot;p%d&quot;, i+1);
+&nbsp;
+      /* get argument */
+      bufsiz = sizeof(buf);
+      if ( ZCslGet(aCsl, name, buf, &bufsiz) ) return; /* (1) */
+&nbsp;
+      /* check for number */
+      if (!checkNumber(buf)) {
+         sprintf(buf, &quot;argument p%d is no number!&quot;, i+1);
+         ZCslSetError(aCsl, buf, -1); /* (2) */
+      } /* if */
+&nbsp;
+      sum += atof(buf);
+   } /* for */
+&nbsp;
+   /* return result */
+   sprintf(buf, &quot;%f&quot;, sum / argCount);
+   ZCslSetResult(aCsl, buf, -1); /* (2) */
+} /* average */
+&nbsp;
+int main()
+{
+   long bufsize;
+   char buf[1024];
+   static char *vals[] = { &quot;3&quot;, &quot;12&quot;, &quot;17&quot; };
+&nbsp;
+   printf(&quot;opening csl\r\n&quot;);
+   errs = ZCslOpen(&csl,0);
+   checkErrs();
+&nbsp;
+   printf(&quot;\r\nget csl version\r\n&quot;);
+   bufsize = sizeof(buf);
+   errs = ZCslGet(csl, &quot;cslVersion&quot;, buf, &bufsize); /* (1) */
+   checkErrs();
+   printf(&quot;  csl version is %s\r\n&quot;, buf);
+&nbsp;
+   printf(&quot;\r\nload C function 'average'\r\n&quot;);
+   errs = ZCslAddFunc(
+      csl,                               /* handle */
+      module,                            /* module name */
+      &quot;average(const p1, &quot;               /* declaration */
+             &quot;[const p2, &quot;
+              &quot;const p3, &quot;
+              &quot;const p4, &quot;
+              &quot;const p5])&quot;,
+      average);                          /* function address */
+   checkErrs();
+&nbsp;
+   printf(&quot;\r\ncall 'average' from C\r\n&quot;);
+   errs = ZCslCall(
+      csl,                               /* handle */
+      module,                            /* module name */
+      &quot;average&quot;,                         /* function to call */
+      sizeof(vals)/sizeof(char*),        /* # of arguments */
+      vals);                             /* arguments */
+   checkErrs();
+&nbsp;
+   printf(&quot;\r\nget result\r\n&quot;);
+   bufsize = sizeof(buf);
+   errs = ZCslGetResult(csl, buf, &bufsize); /* (1) */
+   checkErrs();
+   printf(&quot;  result = %s\r\n&quot;, buf);
+&nbsp;
+   printf(&quot;\r\ncompile a script from memory\r\n&quot;);
+   errs = ZCslLoadScriptMem(
+      csl,                               /* handle */
+      module,                            /* module name */
+&nbsp;
+      &quot;#loadLibrary 'ZcSysLib'\n&quot;        /* the script */
+      &quot;&quot;
+      &quot;check()\n&quot;
+      &quot;{\n&quot;
+      &quot;   sysLog('the average of 3, 5, 12 and 7 is '\n&quot;
+      &quot;          |average(3,5,12,7)\n&quot;
+      &quot;   );\n&quot;
+      &quot;}\n&quot;
+   );
+   checkErrs();
+&nbsp;
+   printf(&quot;\r\ncall 'check' within compiled script\r\n&quot;);
+   errs = ZCslCall(csl, module, &quot;check&quot;, 0, 0);
+   checkErrs();
+&nbsp;
+   printf(&quot;\r\nclosing csl\r\n&quot;);
+   errs = ZCslClose(csl);
+   checkErrs();
+&nbsp;
+   return 0;
+} /* main */
+</pre><p>
+Notes:
+</p><ol start="1" type="1">
+ <li>Within implementations of CSL functions there is no need to handle
+     errors since that will be done by the caller. Just return in case of an
+     error.<br><br>
+ <li>These functions will always return a value of 0, so there is no
+     need to check for errors.
+</ol>
+</td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+</table>
+<!-- lower line -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="25%">
+<font size="-2">Copyright &copy; <A HREF="http://ibk-software.ch">IBK Landquart</font></td>
+<td width="50%" align="center">
+<font size="-2">Last revision: 27.05.2002
+</font></td>
+<td width="25%" align="right">
+<font size="-2">&lt;&lt; <a href="capi1.htm">Back</a>&nbsp;&nbsp;<a href="#top">Top</a>&nbsp;&nbsp;<a href="capi3.htm">Next</a> &gt;&gt;</font></td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table></div>
+<a name="end"></a>
+</body></html>

@@ -1,0 +1,98 @@
+# Copyright (c) 2001 IBK-Landquart-Switzerland. All rights reserved.
+#
+# Module      :  Makelib
+# Application :  IBK Open Class Library
+# Purpose     :  Generic makefile for dll/lib build
+#
+# Date        Description                                 Who
+# --------------------------------------------------------------------------
+# 2001.06.09  First implemention                          P.Koch, IBK
+#
+# OPEN SOURCE LICENSE
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 2 as published by
+# the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+# more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to IBK at info@ibk-software.ch.
+
+!ifdef TRACE
+CDEFS = -DZC_TRACE_DEVELOP $(CDEFS)
+!endif
+
+CFLAGS = -q -w-par -w-sus -w-ccc -tWCDE -K -I"$(INCDIR);$(SRCDIR);$(INCLUDE)" $(CDEFS) -c
+LFLAGS = /q /c /Tpd /j"$(LIB)" /L"$(LIBDIR);$(LIB)" /m /M
+
+.SUFFIXES: .hpp .h .hss .obj .cpp .dll
+
+# rules for copying files
+
+{$(SRCDIR)}.hpp{$(INCDIR)}.hpp:
+  @echo copy to $@
+  @copy /y $< $@ >nul
+
+{$(SRCDIR)}.h{$(INCDIR)}.h:
+  @echo copy to $@
+  @copy /y $< $@ >nul
+
+{$(SRCDIR)}.hss{$(CSSDIR)}.hss:
+  @echo copy to $@
+  @copy /y $< $@ >nul
+
+.dll{$(BINDIR)}.dll:
+  @echo copy to $@
+  @copy /y $< $@ >nul
+
+.dll{$(IBINDIR)}.dll:
+  @echo copy to $@
+  @copy /y $< $@ >nul
+
+# rules for compiling
+
+{$(SRCDIR)}.cpp.obj:
+  @bcc32 $(CFLAGS) $<
+
+#explicit rules
+
+all : $(TARGETDIRS) $(TARGETS)
+
+$(TARGETDIRS) :
+  &@if not exist $* md $*
+
+$(LIBDIR)\$(TARGETLIB).lib : $(TARGET).dll
+  @echo creating $@
+  @implib -f $@ $**
+
+$(BINDIR)\$(TARGET).dll : $(TARGET).dll
+
+$(IBINDIR)\$(TARGET).dll : $(TARGET).dll
+
+$(TARGET).dll : $(OBJECTS)
+  @echo linking $@
+  @ilink32 $(LFLAGS) \
+   c0d32 $(OBJECTS), \
+   $(TARGET).dll, \
+   $(TARGET).map, \
+   cw32 import32 $(LIBRARIES)
+
+$(OBJECTS): $(INCLUDES) makefile
+
+CLEANUPS = \
+  $(CLEANUPS) \
+  $(OBJECTS) \
+  $(TARGET).dll \
+  $(TARGET).map \
+  $(TARGET).ilc \
+  $(TARGET).ild \
+  $(TARGET).ilf \
+  $(TARGET).ils \
+  $(TARGET).tds
+
+clean :
+  @for %f in ($(CLEANUPS)) do @if exist %f del %f

@@ -1,0 +1,96 @@
+/* Copyright (c) 2001-2002 IBK-Landquart-Switzerland. All rights reserved.
+ *
+ * Module      :  ZcComLib.csl
+ * Application :  CSL async communications library
+ * Purpose     :  CSL header file
+ *
+ * Date        Description                                 Who
+ * --------------------------------------------------------------------------
+ * 2001.05.31  First implementation                        P.Koch, IBK
+ * 2001.07.07  Renaming from css to csl                    P.Koch, IBK
+ * 2002.05.26  Release 4.04                                P.Koch, IBK
+ *
+ * OPEN SOURCE LICENSE
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to IBK at info@ibk-software.ch.
+ */
+
+// library info
+extern const comVersion;      // library version
+extern const comCompiler;     // compiler used
+extern const comBuilt;        // build date/time
+extern const comLibtype;      // API or NATIVE
+
+var comOpen(                  // open communication device
+   const devname,                // device name
+   [const logfile]);             // optional logfile
+                                 // returns a com handle
+
+var comClose(                 // close communication device
+   const handle);                // com handle
+
+var comRead(                  // read until maxchars or timeout
+   const handle,                 // handle
+   [const maxchars]);            // max. # of chars to read
+                                 // returns data from device
+
+var comReadChar(              // read single char
+   const handle);                // com handle
+                                 // returns char
+
+var comWrite(                 // write to device
+   const handle,                 // com handle
+   const data);                  // data to write
+                                 // returns 1
+
+var comWaitForOutput(         // wait til output completed
+   const handle);                // com handle
+                                 // returns 1
+
+var comPurgeInput(            // clear input buffers
+   const handle);                // com handle
+                                 // returns 1
+
+var comInputChars(            // query input characters waiting
+   const handle);                // com handle
+                                 // returns # of characters ready to read
+
+var comReadTimeout(           // query or set read timeout
+   const handle,                 // com handle
+   [const millisecs]);           // timeout in milliseconds
+                                 // returnd timeout in millisecs
+
+var comBps(                   // query or set bits per second
+   const handle,                 // com handle
+   [const bps]);                 // new bps to set
+                                 // returns speed in bps
+
+var comBits(                  // query or set bits per char
+   const handle,                 // com handle
+   [const bits]);                // new # of bits/char (5...8)
+                                 // returns # of bits/char
+
+var comParity(                // query or set parity
+   const handle,                 // com handle
+   [const parity]);              // new parity (E, O, N, M, S)
+                                 // returns parity
+
+var comStops(                 // query or set # of stopbits
+   const handle,                 // com handle
+   [const stopbits]);            // new stopbit count (1, 1.5, 2)
+                                 // returns # of stopbits
+
+var comFlow(                  // query or set flow control
+   const handle,                 // com handle
+   [const flow]);                // new flow ctrl mode (N, H, S, B)
+                                 // returns flow ctrl mode

@@ -1,0 +1,196 @@
+/* Copyright (c) 2001-2002 IBK-Landquart-Switzerland. All rights reserved.
+ *
+ * Module      :  ZcStrLib.hss
+ * Application :  CSL string library
+ * Purpose     :  CSL header file
+ *
+ * Date        Description                                 Who
+ * --------------------------------------------------------------------------
+ * 2001.05.27  First implementation                        P.Koch, IBK
+ * 2001.07.07  Renaming from css to csl                    P.Koch, IBK
+ * 2002.05.26  Release 4.04                                P.Koch, IBK
+ *
+ * OPEN SOURCE LICENSE
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to IBK at info@ibk-software.ch.
+ */
+
+// library info
+extern const strVersion;      // library version
+extern const strCompiler;     // compiler used
+extern const strBuilt;        // build date/time
+extern const strLibtype;      // API or NATIVE
+
+// functions in alfabetical order
+
+var strAscii(                // get ASCII value of a character
+   const character);            // character od interest
+                                // returns decimal ascii value
+
+var strBuildRecord(          // build data record
+   const mode,                  // a,A=ASCII, c,C=CSV, t,T=TSV etc.
+   const &fmts[],               // record field descriptor list
+   const &vals[],               // record values
+   [const nullind]);            // using nullvalue indicators (def = false)
+                                // returns final record
+
+var strCenter(               // center string
+   const string,                // string to handle
+   const width,                 // final width
+   [const padd]);               // padding character (def = ' ')
+                                // returns final string
+
+var strChange(               // replace tokens in a string
+   const string,                // source string
+   const oldpatt,               // pattern to search
+   const newpatt,               // replacement text
+   [const start,                // starting position (def = 1)
+    const count,                // max # of changes (def = MAXLONG)
+    const ignoreCase]);         // case insensitive search (def = false)
+                                // returns final string
+
+var strChar(                 // get character from decimal ascii value
+   const asciival);             // value of ascii char
+                                // returns corresponding character
+
+var strExport(               // export string containing ctrl chars
+   const string);               // string containing ctrl codes
+                                // returns escaped string
+
+var strFormatNumber(         // format number
+   const val,                   // value to format
+   const width,                 // total width of target
+   [const frac]);               // # of fractional digits (def = 0)
+                                // returns formatted string
+
+var strImport(               // import string with escaped chars
+   const string);               // string containing escapes
+                                // returns converted string
+
+var strIndexOf(              // find pattern in a string
+   const string,                // string to search
+   const pattern,               // pattern to match
+   [const start,                // start position (def = 1)
+    const ignoreCase]);         // case insensitive search (def = false)
+                                // returns pos of match or 0 (not found)
+
+var strIsInteger(            // check if var represents a integer
+   const string);               // string to check
+                                // returns true/false
+
+var strIsNumber(             // check if var represents a number
+   const string);               // string to check
+                                // returns true/false
+
+var strIsPrintable(          // check if string contains only printable chars
+   const string);               // string to check
+                                // returns true/false
+
+var strLastIndexOf(          // find last pattern in a string
+   const string,                // string to search
+   const pattern,               // pattern to match
+   [const start,                // starting pos (def = MAXLONG = end)
+    const ignoreCase]);         // case insensitive search (def = false)
+                                // returns pos of match or 0 (not found)
+
+var strLeftJustify(          // left justify a string
+   const string,                // string to handle
+   const width,                 // filal width
+   [const padd]);               // padding char (def = ' ')
+                                // returns justified string
+
+var strLength(               // return size of string
+   const string);               // string in question
+                                // returns # of chars
+
+var strLower(                // convert to lowercase
+   const string);               // string to handle
+                                // returns string in lower case
+
+var strParseRecord(          // parse a datafile record
+   const rec,                   // record string to parse
+   const mode,                  // a,A=ASCII, c,C=CSV, t,T=TSV etc.
+   const &fmts[],               // record field descriptor list
+   var &vals[],                 // array for extracted values
+   [const nullind]);            // user nullvalue indicators (def = false)
+                                // returns 1
+
+var strRemoveWords(          // remove words from string
+   const string,                // string to handle
+   const start,                 // # of firts word to remove
+   [const count]);              // max. # of words to remove (def=MAXLONG)
+                                // returns string with words removed
+
+var strRightJustify(         // right justify a string
+   const string,                // string to handle
+   const width,                 // final width of string
+   [const padd]);               // padding char (def = ' ')
+                                // returns justified string
+
+var strSplitConnectString(   // split db connect string
+   const connstr,               // connect string 'db:user/passwd@conn'
+   [var& password,              // target var for password
+    var& connection,            // target var for connection
+    var& database]);            // target var for database type
+                                // returns user name
+
+var strSplitPath(            // split a file path
+   const path,                  // full path to split
+   [var& ext,                   // target var for extension
+    var& dir,                   // target var for directory
+    var& drive]);               // target var for drive
+                                // returns filename
+
+var strSpread(               // spread a string
+   const string);               // string to handle
+                                // returns string spread by spaces
+
+var strStrip(                // remove leading and trailing chars
+   const string,                // string to handle
+   [const char]);               // char to remove (def = ' ')
+                                // returns string with chars removed
+
+var strStripExtension(       // remove extension from filename
+   const filename);             // filename (or full path)
+                                // returns filename with ext removed
+
+var strStripLeading(         // remove leading chars
+   const string,                // string to handle
+   [const char]);               // char to remove (def = ' ')
+                                // returns string with chars removed
+
+var strStripTrailing(        // remove trailing chars
+   const string,                // string to handle
+   [const char]);               // char to remove (def = ' ')
+                                // returns string with chars removed
+
+var strSubString(            // extract substring
+   const string,                // string to handle
+   const start,                 // starting position
+   [const count,                // length of substring (def = -1 = rest)
+    const padd]);               // padding char (def = ' ')
+                                // returns substring
+
+var strUpper(                // convert to upper case
+   const string);               // string to convert
+                                // returns string in upper case
+
+var strWordCount(            // count words in a string
+   const string);               // string to check
+                                // returns # of words found
+
+var strWords(                // extract words from string
+   const string,                // string to search
+   const start,                 // starting word #
+   [const count]);              // max. # of words (def = MAXLONG = rest)
+

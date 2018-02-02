@@ -1,0 +1,53 @@
+/* Copyright (c) 2001-2002 IBK-Landquart-Switzerland. All rights reserved.
+ *
+ * Module      :  ZcMathLb.csl
+ * Application :  CSL math library
+ * Purpose     :  CSL header file
+ *
+ * Date        Description                                 Who
+ * --------------------------------------------------------------------------
+ * 2001.05.30  First implementation                        P.Koch, IBK
+ * 2001.07.07  Renaming from css to csl                    P.Koch, IBK
+ * 2002.05.26  Release 4.04                                P.Koch, IBK
+ *
+ * OPEN SOURCE LICENSE
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to IBK at info@ibk-software.ch.
+ */
+
+// library info
+extern const mathVersion;          // library version
+extern const mathCompiler;         // compiler used
+extern const mathBuilt;            // build date/time
+extern const mathLibtype;          // API or NATIVE
+
+// functions in alfabetical order
+var abs(const x);                  // return absolute value
+var acos(const x);                 // calculate arccosine
+var asin(const x);                 // calculate arcsine
+var atan(const x);                 // calculate arctangent
+var ceil(const x);                 // find integer >= x
+var cos(const x);                  // calculate cosine
+var cosh(const x);                 // calculate hyperbolic cosine
+var exp(const x);                  // calculate exponential function
+var floor(const x);                // find integer <= x
+var log(const x);                  // calculate natural logarithm
+var log10(const x);                // calculate base 10 logarithm
+var max(const x, const y);         // return larger of x and y
+var min(const x, const y);         // return lesser of x and y
+var pow(const x, const y);         // compute power
+var sqrt(const x);                 // calculate square root
+var sin(const x);                  // calculate sine
+var sinh(const x);                 // calculate hyperbolic sine
+var tan(const x);                  // calculate tangent
+var tanh(const x);                 // calculate hyperbolic tangent

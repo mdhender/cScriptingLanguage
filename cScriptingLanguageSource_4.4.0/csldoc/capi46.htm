@@ -1,0 +1,185 @@
+<html><head><title>CSL Reference&nbsp-&nbsp;ZCslGet</title>
+<meta name="description" content="ZCslGet">
+<meta name="keywords" content="PROGRAMMING CSL C SCRIPT SCRIPTING LANGUAGE IBK ORACLE MYSQL DB2 ODBC VISUALAGE BORLAND VISUAL C++ GCC">
+</head>
+<body leftmargin="10" topmargin="2"
+text="#000000" bgcolor="#FFFFFF" link="#002288" vlink="#444444" alink="#FF2200">
+<div align="center">
+<a name="top"></a>
+<!-- upper -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="150">
+<a href="index.htm"><img src="../img/csl.png" width="97" height="56" border="0"></a>
+</td>
+<td width="300%" align="center" valign="bottom">
+<h1>ZCslGet</h1>
+</td>
+<td width="150" align="right">
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td nowrap align="right" valign="top"><font size="-2"><b>
+C&nbsp;Scripting&nbsp;Language<br>
+Reference&nbsp;Manual<br>
+Version&nbsp;4.4.0<br></b>
+<br>&lt;&lt;&nbsp;<a href="capi44.htm">Back</a>&nbsp;&nbsp;<a href="#end">End</a>&nbsp;&nbsp;<a href="capi47.htm">Next</a>&nbsp;&gt;&gt;<br>
+</font>
+</td></tr>
+</table>
+</td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- left column -->
+<tr valign="top">
+<td></td>
+<td>&nbsp;</td>
+<td bgcolor="#E0E0E0" width="150">
+<table cellspacing="0" cellpadding="2" border="0" width="100%">
+<tr>
+<td nowrap bgcolor="#0044AA"><b><font color="#FFFFFF">INDEX</font></b></td>
+</tr>
+<tr>
+<td nowrap><font size="-1">
+<a href="intro1.htm">Introduction</a><br>
+<a href="inst1.htm">Installation</a><br>
+<a href="using1.htm">Using the CSL executive</a><br>
+<a href="lang1.htm">Language</a><br>
+<a href="direct1.htm">Directives</a><br>
+<a href="sys1.htm">System library</a><br>
+<a href="str1.htm">String library</a><br>
+<a href="math1.htm">Math library</a><br>
+<a href="rex1.htm">Regular expression lib.</a><br>
+<a href="file1.htm">File library</a><br>
+<a href="dax1.htm">Database library</a><br>
+<a href="comm1.htm">Async Communication</a><br>
+<a href="prf1.htm">Registry/Profile handling</a><br>
+<a href="win1.htm">Windows control</a><br>
+<a href="capi1.htm">C API</a><br>
+&nbsp;&nbsp;&nbsp;<a href="capi2.htm">Embedding CSL</a><br>
+&nbsp;&nbsp;&nbsp;<a href="capi3.htm">Writing libraries</a><br>
+&nbsp;&nbsp;&nbsp;<a href="capi41.htm">API reference</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi42.htm">ZCslAddFunc</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi4M.htm">ZCslAddVar</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi43.htm">ZCslCall</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi4N.htm">ZCslCallEx</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi44.htm">ZCslClose</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi46.htm">ZCslGet</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi47.htm">ZCslGetError</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi48.htm">ZCslGetResult</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi4A.htm">ZCslLoadLibrary</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi4B.htm">ZCslLoadScriptFile</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi4C.htm">ZCslLoadScriptMem</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi4D.htm">ZCslOpen</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi4E.htm">ZCslSet</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi4F.htm">ZCslSetError</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi4G.htm">ZCslSetResult</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi45.htm">ZCslSetTraceMode</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi4H.htm">ZCslShow</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi4I.htm">ZCslStartDateTime</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi4P.htm">ZCslTrace</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi49.htm">ZCslTraceMode</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi4O.htm">ZCslVarExists</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi4K.htm">ZCslVarResize</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="capi4L.htm">ZCslVarSizeof</a><br>
+<a href="api1.htm">C++ Class Interface</a><br>
+<a href="link1.htm">CSL links</a><br>
+</font></td>
+</tr>
+</table>
+</td>
+<!-- main column -->
+<td>&nbsp;&nbsp;</td>
+<td width="300%">
+<pre>
+long ZCslGet(               /* get var or const value */
+   ZCslHandle aHandle,         /* CSL handle */
+   const char *aVarName,       /* variable name */
+   char *aBuffer,              /* buffer for value (NULL = query size) */
+   long *aSize                 /* buffer size */
+);
+</pre><p>
+Get value of any CSL variable or constant.
+</p><p>
+On entry <i>*aSize</i> must be set to the actual size of the buffer.
+No more than this amount will be filled including zero termination. The rest
+of the variable content will in case be truncated. On exit <i>*aSize</i> is
+always set to the buffer size required for holding the full value.
+</p><p>
+Pass <i>aBuffer</i> as NULL to only query the required buffer size.
+</p><p>
+If <i>aSize</i> is NULL, the API assumes your buffer is in any case large
+enough and will not limit the size at all (I strongly don't recommend this!).
+</p><p>
+Example:
+</p><pre>
+long size, errs;
+char *buf;
+&nbsp;
+/* get size of value first for buffer allocation: */
+errs = ZCslGet(csl, &quot;adr[5][2]&quot;, NULL, &amp;size);
+if (errs) .... /* error handling */
+&nbsp;
+/* now allocate buffer and retrieve value */
+buf = (char*)malloc(size);
+errs = ZCslGet(csl, &quot;adr[5][2]&quot;, buf, &amp;size);
+if (errs) .... /* error handling */
+&nbsp;
+...
+&nbsp;
+/* when value no longer needed, don't forget to release buffer */
+free(buf);
+</pre>
+
+</td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+</table>
+<!-- lower line -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="25%">
+<font size="-2">Copyright &copy; <A HREF="http://ibk-software.ch">IBK Landquart</font></td>
+<td width="50%" align="center">
+<font size="-2">Last revision: 27.05.2002
+</font></td>
+<td width="25%" align="right">
+<font size="-2">&lt;&lt; <a href="capi44.htm">Back</a>&nbsp;&nbsp;<a href="#top">Top</a>&nbsp;&nbsp;<a href="capi47.htm">Next</a> &gt;&gt;</font></td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table></div>
+<a name="end"></a>
+</body></html>

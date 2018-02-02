@@ -1,0 +1,245 @@
+<html><head><title>CSL Reference&nbsp-&nbsp;Operators</title>
+<meta name="description" content="Operators">
+<meta name="keywords" content="PROGRAMMING CSL C SCRIPT SCRIPTING LANGUAGE IBK ORACLE MYSQL DB2 ODBC VISUALAGE BORLAND VISUAL C++ GCC">
+</head>
+<body leftmargin="10" topmargin="2"
+text="#000000" bgcolor="#FFFFFF" link="#002288" vlink="#444444" alink="#FF2200">
+<div align="center">
+<a name="top"></a>
+<!-- upper -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="150">
+<a href="index.htm"><img src="../img/csl.png" width="97" height="56" border="0"></a>
+</td>
+<td width="300%" align="center" valign="bottom">
+<h1>Operators</h1>
+</td>
+<td width="150" align="right">
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td nowrap align="right" valign="top"><font size="-2"><b>
+C&nbsp;Scripting&nbsp;Language<br>
+Reference&nbsp;Manual<br>
+Version&nbsp;4.4.0<br></b>
+<br>&lt;&lt;&nbsp;<a href="lang45.htm">Back</a>&nbsp;&nbsp;<a href="#end">End</a>&nbsp;&nbsp;<a href="lang6.htm">Next</a>&nbsp;&gt;&gt;<br>
+</font>
+</td></tr>
+</table>
+</td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- left column -->
+<tr valign="top">
+<td></td>
+<td>&nbsp;</td>
+<td bgcolor="#E0E0E0" width="150">
+<table cellspacing="0" cellpadding="2" border="0" width="100%">
+<tr>
+<td nowrap bgcolor="#0044AA"><b><font color="#FFFFFF">INDEX</font></b></td>
+</tr>
+<tr>
+<td nowrap><font size="-1">
+<a href="intro1.htm">Introduction</a><br>
+<a href="inst1.htm">Installation</a><br>
+<a href="using1.htm">Using the CSL executive</a><br>
+<a href="lang1.htm">Language</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang2.htm">Comments</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang3.htm">Numbers</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang31.htm">Literals</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang41.htm">Var and const</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang5.htm">Operators</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang6.htm">Statements and blocks</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang71.htm">Program flow</a><br>
+&nbsp;&nbsp;&nbsp;<a href="langB.htm">Trace facility</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang81.htm">Exception handling</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang91.htm">Functions</a><br>
+&nbsp;&nbsp;&nbsp;<a href="langA.htm">Predefined identifiers</a><br>
+<a href="direct1.htm">Directives</a><br>
+<a href="sys1.htm">System library</a><br>
+<a href="str1.htm">String library</a><br>
+<a href="math1.htm">Math library</a><br>
+<a href="rex1.htm">Regular expression lib.</a><br>
+<a href="file1.htm">File library</a><br>
+<a href="dax1.htm">Database library</a><br>
+<a href="comm1.htm">Async Communication</a><br>
+<a href="prf1.htm">Registry/Profile handling</a><br>
+<a href="win1.htm">Windows control</a><br>
+<a href="capi1.htm">C API</a><br>
+<a href="api1.htm">C++ Class Interface</a><br>
+<a href="link1.htm">CSL links</a><br>
+</font></td>
+</tr>
+</table>
+</td>
+<!-- main column -->
+<td>&nbsp;&nbsp;</td>
+<td width="300%">
+<p>
+Operators in descending precedence:
+</p><p>
+<table border="0" cellpadding="3" cellspacing="0">
+ <tr bgcolor="#0044AA" valign="top">
+  <td><font color="#FFFFFF"><b>Operators</b></font></td>
+  <td bgcolor="#0034AA"><font color="#FFFFFF"><b>Comments</b></font></td>
+ </tr>
+ <tr bgcolor="#C0E0FF" valign="top">
+  <td>( ) [ ]</td>
+  <td bgcolor="#B0D0FF">&nbsp;
+  </td>
+ </tr>
+ <tr bgcolor="#E0F0FF" valign="top">
+  <td>! + - ++ -- &amp; sizeof exists</td>
+  <td bgcolor="#D0E0FF">
+   Unary pre/postfixes. &amp; is only allowed in parameter lists
+  </td>
+ </tr>
+ <tr bgcolor="#C0E0FF" valign="top">
+  <td>* / \ %</td>
+  <td bgcolor="#B0D0FF">
+   \ is integer divide
+  </td>
+ </tr>
+ <tr bgcolor="#E0F0FF" valign="top">
+  <td>- + |</td>
+  <td bgcolor="#D0E0FF">
+   With + one or both operands may be a string (non-numeric) whereby string
+   concatenation is performed instead of a numeric add.<br>
+   | is the string concatenation operator.
+  </td>
+ </tr>
+ <tr bgcolor="#C0E0FF" valign="top">
+  <td>&lt; &lt;= &gt; &gt;=</td>
+  <td bgcolor="#B0D0FF">
+   If one or both operands are strings, a literally string-compare will take place.
+  </td>
+ </tr>
+ <tr bgcolor="#E0F0FF" valign="top">
+  <td>== !=</td>
+  <td bgcolor="#D0E0FF">
+   If one or both operands are strings, a literally string-compare will take place.
+  </td>
+ </tr>
+ <tr bgcolor="#C0E0FF" valign="top">
+  <td>&&</td>
+  <td bgcolor="#B0D0FF">
+   Evaluation of A &&amp; B:<br>
+   In CSL, B will always be evaluated.<br>
+   In C/C++, B will only be evaluated if A is true.
+  </td>
+ </tr>
+ <tr bgcolor="#E0F0FF" valign="top">
+  <td>||</td>
+  <td bgcolor="#D0E0FF">
+   Evaluation of A || B:<br>
+   In CSL, B will always be evaluated.<br>
+   In C/C++, B will only be evaluated if A is false.
+  </td>
+ </tr>
+ <tr bgcolor="#C0E0FF" valign="top">
+  <td>= += -= *= /= \= %= |=</td>
+  <td bgcolor="#B0D0FF">
+   With += source or target may be a string (non-numeric) whereby string
+   concatenation is performed instead of a numeric add.
+  </td>
+ </tr>
+ <tr bgcolor="#E0F0FF" valign="top">
+  <td>,</td>
+  <td bgcolor="#D0E0FF">
+   Comma is used to group several expressions into a single statement.
+  </td>
+ </tr>
+</table>
+</p><p>
+There are no bitwise (| &amp; ^^ ~~) and no conditional (? :) operators in CSL.
+</p><p>
+Expressions true/false evaluation:
+</p>
+<ul>
+ <li>if the expression is a number, zero values are false and nonzero values are true.<br><br>
+ <li>if the expression is no number, empty strings are false and nonempty are true.
+</ul>
+<p>
+The <i>sizeof</i> operator returns 1 for simple var's. For arrays it returns the
+number of elements for the given index:
+</p><pre>
+var xy[5][4];
+
+sizeof(xy);      // 20
+sizeof xy[1];    // 4
+sizeof xy[2][3]; // 1
+</pre><p>
+The <i>exists</i> operator checks if a variable exists and returns 1 or 0. Within
+directives the condition is met if the var/const is declared despite the fact indexes
+may be invalid. In script code the var/const must be allocated and any indexes must
+be valid to return 1:
+</p><pre>
+extern const a[];
+
+#message exists maxSize       // 1, even if only declared but
+                              //    not yet implemented
+const a[3] = { 1, 2, 3 };
+
+#message exists(maxSize[99])  // still 1, indexes are not checked!
+
+foo()
+{
+   sysLog(exists a);      // 1
+   sysLog(exists(a[1]));  // 1
+   sysLog(exists a[99]);  // 0, indexes are checked in code!
+}
+</pre>
+
+</td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+</table>
+<!-- lower line -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="25%">
+<font size="-2">Copyright &copy; <A HREF="http://ibk-software.ch">IBK Landquart</font></td>
+<td width="50%" align="center">
+<font size="-2">Last revision: 27.05.2002
+</font></td>
+<td width="25%" align="right">
+<font size="-2">&lt;&lt; <a href="lang45.htm">Back</a>&nbsp;&nbsp;<a href="#top">Top</a>&nbsp;&nbsp;<a href="lang6.htm">Next</a> &gt;&gt;</font></td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table></div>
+<a name="end"></a>
+</body></html>

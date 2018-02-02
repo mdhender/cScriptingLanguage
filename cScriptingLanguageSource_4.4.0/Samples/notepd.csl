@@ -1,0 +1,84 @@
+#loadLibrary 'ZcSysLib'
+#loadLibrary 'ZcWinLib'
+#loadLibrary 'ZcFileLb'
+
+/*
+ * w i n W a i t F o r
+ *
+ * Wait until a window with given title is open
+ */
+static var winWaitFor(const title, const maxsecs)
+{
+   const start = sysElapsed();
+   var win[10][2]; // space for window records
+   while (!winFind(title, win)) {
+      sysSleep(300); // wait a while
+      if (sysElapsed()-start >= maxsecs)
+         throw '%%% window '|title|' not found!';
+   } // for
+   return win[0][0]; // handle
+} // winWaitFor
+
+main()
+{
+   // Launch notepad.exe. We use the "start" command since we want
+   // sysCommand to return immediately and not to wait till notepad
+   // has ended:
+   sysLog('starting notepad...');
+   sysCommand('start notepad.exe');
+
+   // Now wait for notepad to start.
+   // I used a german notepad.exe of Windows 2000, for other locales
+   // or versions the title must be changed accordingly:
+   sysLog('waiting for window...');
+   const handle = winWaitFor('Unbenannt - Editor', 5);
+
+   // make sure window is activated
+   sysLog('activate window...');
+   winActivate(handle);
+
+   // write text to the client area
+   sysLog('post some text...');
+   winPostText('Hello world!');
+
+   sysLog('save file...');
+   // make sure file does not exist in advance:
+   try { fileDelete('C:\\CssTest.txt'); } catch (var exc[]) {}
+
+   // select "save as.." by the menu:
+   winPostVKey(VK_MENU); // open menu
+   winPostVKey(VK_DOWN); // move down to "save as..."
+   winPostVKey(VK_DOWN);
+   winPostVKey(VK_DOWN);
+   winPostVKey(VK_DOWN);
+   winPostText('\n');    // could also use winPostVKey(VK_RETURN) here
+
+   // write file name into file dialog and save by enter:
+   winPostText('C:\\CssTest.txt\n');
+
+   // Now fool around with the window
+   sysLog('maximize...');
+   winMaximize(handle);
+   sysSleep(1000);
+
+   sysLog('restore...');
+   winRestore(handle);
+   sysSleep(1000);
+
+   sysLog('minimize...');
+   winMinimize(handle);
+   sysSleep(1000);
+
+   sysLog('restore...');
+   winRestore(handle);
+   sysSleep(1000);
+
+   // Close notepad. This could of cause also be done with VKeys.
+   // Using winClose is a "hard" close giving the application no
+   // chance to complain anything.
+   sysLog('close window...');
+   winClose(handle);
+
+   sysPrompt('press enter to finish...');
+} // main
+

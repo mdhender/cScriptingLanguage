@@ -1,0 +1,128 @@
+/* Copyright (c) 2001-2002 IBK-Landquart-Switzerland. All rights reserved.
+ *
+ * Module      :  ZcMathLb.csl
+ * Application :  CSL math library
+ * Purpose     :  CSL header file
+ *
+ * Date        Description                                 Who
+ * --------------------------------------------------------------------------
+ * 2001.05.30  First implementation                        P.Koch, IBK
+ * 2001.07.07  Renaming from css to csl                    P.Koch, IBK
+ * 2002.05.26  Release 4.04                                P.Koch, IBK
+ *
+ * OPEN SOURCE LICENSE
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to IBK at info@ibk-software.ch.
+ */
+
+// library info
+extern const fileVersion;     // library version
+extern const fileCompiler;    // compiler used
+extern const fileBuilt;       // build date/time
+extern const fileLibtype;     // API or NATIVE
+
+// standard files
+extern const fileStdIn;       // standard input
+extern const fileStdOut;      // standard output
+extern const fileStdErr;      // standard error
+
+// fileOpen mode flags
+extern const fileOpenRead;    // open for reading
+extern const fileOpenWrite;   // open for writing
+extern const fileOpenAppend;  // seek to end at open
+extern const fileOpenTrunc;   // clear file at open
+extern const fileOpenOld;     // file must already exist
+extern const fileOpenNew;     // file must not already exist
+extern const fileOpenBinary;  // open in binary mode
+
+// functions in alfabetical order
+
+var fileClose(             // close file
+   const handle);             // file handle
+                              // returns 1
+
+var fileCopy(              // copy files
+   const source,              // source file name
+   const dest);               // destination file name
+                              // returns 1
+
+var fileDelete(            // delete a file
+   const filename);           // file name
+                              // returns 1
+
+var fileDelDir(            // delete an empty directory
+   const dirname);            // directory name
+                              // returns 1
+
+var fileEof(               // check for end of file
+   const handle);             // file handle
+                              // returns false=not eof, true=eof
+
+var fileFlush(             // flush file buffers
+   const handle);             // file handle
+                              // returns 1
+
+var fileInfo(              // get file information
+   const filename);           // file name
+                              // returns file information
+
+var fileLocate(            // locate a file
+   const filename,            // file name
+   const varname);            // environment var to search
+                              // returns path of file
+
+var fileMakeDir(           // create a directory
+   const dirname);            // directory name
+                              // returns 1
+
+var fileOpen(              // open a file
+   const filename,            // file name
+   const mode);               // mode flags
+                              // returns file handle
+
+var fileRead(              // read from file
+   const handle,              // file handle
+   [const count]);            // max. # of chars (def=1)
+                              // returns data from file
+
+var fileReadLine(          // read line from file
+   const handle);             // file handle
+                              // returns line from file
+
+var fileReadPos(           // query or seek to read position
+   const handle,              // file handle
+   [const newpos]);           // new read position
+                              // returns read position
+
+var fileRename(            // rename file
+   const oldname,             // old filename
+   const newname);            // new filename
+                              // returns 1
+
+var fileTempName();        // create e unique temporary filename
+                              // returns filename
+
+var fileWrite(             // write to file
+   const handle,              // file handle
+   const data);               // data to write
+                              // returns 1
+
+var fileWriteLine(         // write line to file
+   const handle,              // file handle
+   [const data]);             // line text (def='')
+                              // returns 1
+
+var fileWritePos(          // query or seek to write position
+   const handle,              // file handle
+   [const newpos]);           // new write position
+                              // returns 1

@@ -1,0 +1,6 @@
+LIBRARY     ZcStrLib
+DESCRIPTION "CSL String Library"
+EXPORTS
+            ZCslInitLibAPI
+            ZCslCleanupLibAPI
+

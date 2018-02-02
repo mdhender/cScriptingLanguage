@@ -1,0 +1,6 @@
+LIBRARY     ZcPrfLib
+DESCRIPTION "CSL Profile Library"
+EXPORTS
+            ZCslInitLibAPI
+            ZCslCleanupLibAPI
+

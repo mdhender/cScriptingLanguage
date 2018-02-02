@@ -1,0 +1,121 @@
+/* Copyright (c) 2001-2002 IBK-Landquart-Switzerland. All rights reserved.
+ *
+ * Module      :  ZcDaxLib.hss
+ * Application :  CSL sql database access library
+ * Purpose     :  CSL header file
+ *
+ * Date        Description                                 Who
+ * --------------------------------------------------------------------------
+ * 2001.05.30  First implementation                        P.Koch, IBK
+ * 2001.07.07  Renaming from css to csl                    P.Koch, IBK
+ * 2002.03.22  Added daxCheckCursor                        P.Koch, IBK
+ *
+ * OPEN SOURCE LICENSE
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to IBK at info@ibk-software.ch.
+ */
+
+// library info
+extern const daxVersion;      // library version
+extern const daxCompiler;     // compiler used
+extern const daxBuilt;        // build date/time
+extern const daxLibtype;      // API or NATIVE
+
+// functions in alfabetical order
+
+var daxCheckCursor(           // check cursor state
+   const cursor);                // cursor handle
+                                 // returns: 0 - still ok  
+                                 //          1 - Needs (re)parse
+
+var daxCommit(                // commit transaction
+   const link);                  // link handle
+                                 // returns 1
+
+var daxConnect(               // connect to db
+   const database,               // db type (ORACLE, DB2 etc)
+   [const connection,            // connection name (def='')
+    const username,              // users name (def='')
+    const password,              // password (def='')
+    const maxcursor]);           // cursorpool size (def=16)
+                                 // returns: link handle
+
+var daxDatabase(              // get type of db
+   const link);                  // link handle
+                                 // returns type (ORACLE, DB2 etc.)
+
+var daxDisconnect(            // disconnect from db
+   const link);                  // link handle
+                                 // returns 1
+
+var daxDispose(               // dispose no longer needed cursor
+   const cursor);                // cursor handle
+                                 // returns 1
+
+var daxDone(                  // flush cursor cache
+   const cursor);                // cursor handle
+                                 // returns 1
+
+var daxFetch(                 // fetch values
+   const cursor,                 // cursor handle
+   var& values[],                // target array for values
+   [const nullind]);             // user null idnicators (def=false)
+                                 // returns 1
+
+var daxLiteral(               // build db literal string
+   const string);                // string to literalize
+                                 // returns literalized string
+
+var daxSimple(                // execute simple sql statement
+   const link,                   // link handle
+   const sql);                   // sql statement
+                                 // returns first value if select stmt
+
+var daxParse(                 // parse a sql statement
+   const link,                   // link handle
+   const sql,                    // sql statement
+   [const longmax]);             // max. size of long columns (def=2000)
+                                 // returns 1
+
+var daxRollback(              // rollback transaction
+   const link);                  // link handle
+                                 // returns 1
+
+var daxRowsProcessed(         // get # of rows processed
+   const cursor);                // cursor handle
+                                 // returns # of rows affected
+
+var daxSelectColumnName(      // get name of select column
+   const cursor,                 // cursor handle
+   const index);                 // column index
+                                 // returns name of column
+
+var daxSelectColumnSize(      // get size of select column
+   const cursor,                 // cursor handle
+   const index);                 // column index
+                                 // returns size of column
+
+var daxSelectColumnType(      // get type of select column
+   const cursor,                 // cursor handle
+   const index);                 // column index
+                                 // returns type of column
+
+var daxSelectColumns(         // get # of select columns
+   const cursor);                // cursor handle
+                                 // returns # of columns
+
+var daxSupply(                // supply values
+   const cursor,                 // cursor handle
+   const& values[],              // array with values
+   [const nullind]);             // use null indicators (def=false)
+                                 // returns 1

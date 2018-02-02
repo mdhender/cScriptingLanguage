@@ -1,0 +1,10 @@
+@echo off
+del Embed.exe
+del Embed.exp
+del Embed.lib
+del Embed.obj
+del MyLib.dll
+del MyLib.exp
+del MyLib.lib
+del MyLib.obj
+del testlib.csl

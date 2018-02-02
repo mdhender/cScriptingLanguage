@@ -1,0 +1,159 @@
+/* Copyright (c) 2001-2002 IBK-Landquart-Switzerland. All rights reserved.
+ *
+ * Module      :  ZcSysLib.csl
+ * Application :  CSL system library
+ * Purpose     :  CSL header file
+ *
+ * Date        Description                                 Who
+ * --------------------------------------------------------------------------
+ * 2001.05.23  First implementation                        P.Koch, IBK
+ * 2001.07.07  Renaming from css to csl                    P.Koch, IBK
+ *             Added sysIsBSD, sysIsAIX, sysIsSolaris,
+ *             sysIsUnix and sysIsUnixFamily
+ * 2001.07.28  Enhanced trace facilities                   P.Koch, IBK
+ * 2001.10.27  Add sysIsFreeBSD and sysIsNetBSD            P.Koch, IBK
+ * 2002.05.26  Release 4.04                                P.Koch, IBK
+ *
+ * OPEN SOURCE LICENSE
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to IBK at info@ibk-software.ch.
+ */
+
+// library info
+extern const sysVersion;         // library version
+extern const sysCompiler;        // compiler used
+extern const sysBuilt;           // build date/time
+extern const sysLibtype;         // API or NATIVE
+
+// platform the script is running on
+extern const sysIsOS2;           // OS/2
+extern const sysIsLinux;         // Linux
+extern const sysIsBSD;           // NetBSD or FreeBSD
+extern const sysIsFreeBSD;       // FreeBSD
+extern const sysIsNetBSD;        // NetBSD
+extern const sysIsAIX;           // AIX
+extern const sysIsSolaris;       // Solaris
+extern const sysIsUnix;          // Unix
+extern const sysIsUnixFamily;    // Unix family
+extern const sysIsWindows;       // Any 32 bit Windows
+extern const sysIsWin95Family;   // Windows 95, 98 or ME
+extern const sysIsWinNTFamily;   // Windows NT 3.51, NT 4, 2000 or XP
+extern const sysIsWinServer;     // Windows NT/2000/XP Server
+extern const sysIsWin95;         // Windows 95
+extern const sysIsWin98;         // Windows 98
+extern const sysIsWinME;         // Windows ME
+extern const sysIsWinNT3;        // Windows NT 3.51
+extern const sysIsWinNT4;        // Windows NT 4
+extern const sysIsWin2000;       // Windows 2000
+extern const sysIsWinXP;         // Windows XP
+
+// sysDateFormat constants
+extern const sysDateFormatISO;   // yyyy.mm.dd hh.mm.ss
+extern const sysDateFormatEuro;  // dd.mm.yyyy hh:mm:ss
+extern const sysDateFormatUS;    // mm.dd.yyyy hh.mm.ss
+
+// trace modes
+extern const sysTraceNone;       // trace nothing
+extern const sysTraceCode;       // pcode
+extern const sysTraceFuncs;      // functions
+extern const sysTraceBlks;       // blocks
+extern const sysTraceMsgs;       // messages
+extern const sysTraceInfo;       // info
+extern const sysTraceAll;        // everything
+
+// sysShow constants
+extern const sysShowFunctions;   // show known functions
+extern const sysShowCallStack;   // show call stack
+extern const sysShowFullStack;   // show full stack
+extern const sysShowGlobals;     // show global identifiers
+extern const sysShowLibraries;   // show loaded libraries
+
+// functions in alphabetical order
+
+var sysCommand(              // run system command
+   const cmd);                  // the command
+                                // returns command exit code
+
+var sysDate();               // returns current date
+
+var sysDateTime();           // returns current date and time
+
+var sysDateFormat(           // query or set date/time format
+  [const format]);              // new date/time format
+                                // returns current or new format
+
+var sysDirectory(            // query or set current path
+  [const path]);                // new path to set
+                                // returns path
+
+var sysElapsed();            // return uptime in seconds
+
+var sysEnvVar(               // query or a environment var
+   const varname);              // name of variable
+                                // returns variable value
+
+var sysLoadScript(           // load css script file
+   const filename);             // name of scriptfile
+                                // returns 1
+
+var sysLoadLibrary(          // load css library
+   const dllname);              // name of library file
+                                // returns 1
+
+var sysLog(                  // log a message or empty line
+  [const message,               // the message
+   const raw,                   // no loglevel indenting (true/false)
+   const quiet]);               // to logfile only (true/false)
+                                // returns 1
+
+var sysLogFile(              // open/close/reopen log file
+  [const filename]);            // file to open
+                                // returns 1
+
+var sysLogLevel(             // query or change log level
+  [const level]);               // +/- levels to change (def=MAXLONG)
+                                // returns current level
+
+var sysPrompt(               // show prompt and wait for entry
+  [const message,               // prompt to show
+   const raw]);                 // no loglevel indenting
+                                // returns user entry
+
+var sysSecondsSince(         // calc secs between 2 timestamps
+   const timestamp1,            // later time
+  [const timestamp2]);          // earlier time (def=now)
+                                // returns +/- seconds
+
+var sysSleep(                // delay program execution
+   const millisecs);            // # of milliseconds
+                                // returns 1
+
+var sysShow(                 // show css information
+   const mode,                  // what to show
+  [const depth]);               // information level depth (def=MAXLONG)
+
+var sysStartDate();          // return startup date
+
+var sysStartDateTime();      // return startup date and time
+
+var sysStartTime();          // return startup time
+
+var sysStartTimestamp();     // return startup timestamp
+
+var sysTime();               // return current time
+
+var sysTimestamp();          // return current timestamp
+
+var sysTrace(                // query or set trace mode
+  [const mode]);                // optional new trace mode
+                                // returns current trace mode

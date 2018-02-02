@@ -1,0 +1,31 @@
+#loadLibrary 'ZcSysLib'
+#loadLibrary 'ZcStrLib'
+#loadLibrary 'ZcRexLib'
+
+main()
+{
+   const pattern = '\\(sim[a-z]le\\) \\1';
+   const string  = 'a very simple simple simple string';
+
+   sysLog('compile regular expression');
+   var rx = rexOpen(pattern);
+   var match[6][2];
+
+   sysLog('find and display match');
+   sysLogLevel(+1);
+   var m = rexMatch(rx, string, 6, match);
+   if (m) {
+      for (var i = 0; i < m; i++)
+         sysLog(
+            match[i][0]+' '
+            +match[i][1]+' \''
+            +strSubString(string,match[i][0], match[i][1])
+            +'\''
+         );
+   } else
+      sysLog('no match found');
+   sysLogLevel(-1);
+
+   sysLog('close and release mem');
+   rexClose(rx);
+}

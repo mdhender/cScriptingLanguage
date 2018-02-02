@@ -1,0 +1,7 @@
+LIBRARY     ZcFileLb
+DESCRIPTION "CSL File Library"
+EXPORTS
+            ZCslInitLibAPI
+            ZCslCleanupLibAPI
+
+

@@ -1,0 +1,61 @@
+/* Copyright (c) 2001-2002 IBK-Landquart-Switzerland. All rights reserved.
+ *
+ * Module      :  ZcRexLib.hss
+ * Application :  CSL regular expression library
+ * Purpose     :  CSL header file
+ *
+ * Date        Description                                 Who
+ * --------------------------------------------------------------------------
+ * 2001.05.30  First implementation                        P.Koch, IBK
+ * 2001.07.07  Renaming from css to csl                    P.Koch, IBK
+ * 2002.05.26  Release 4.04                                P.Koch, IBK
+ *
+ * OPEN SOURCE LICENSE
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to IBK at info@ibk-software.ch.
+ */
+
+// library info
+extern const rexVersion;         // library version
+extern const rexCompiler;        // compiler used
+extern const rexBuilt;           // build date/time
+extern const rexLibtype;         // API or NATIVE
+
+// open flags
+extern const rexOpenExtended;    // use extended syntax
+extern const rexOpenIgnorecase;  // ignore case in match
+extern const rexOpenNewline;     // convert \n to newline
+extern const rexOpenNosubreps;   // no subexpression reports
+
+// matching flags
+extern const rexMatchNotbol;     // 1st char is not start of line
+extern const rexMatchNoteol;     // last char is not end of line
+
+// functions in alfabetical order
+
+var rexClose(              // close regular expression handle
+   const handle);             // rex handle
+                              // returns 1
+
+var rexMatch(              // compile regular expression
+   const handle,              // rex handle
+   const string,              // string to match
+   const nmatch,              // # of matches to find
+   var &match[][],            // index & length of every match
+  [const flags]);             // match flags
+                              // returns # of matches
+
+var rexOpen(               // compile regular expression
+   const pattern,             // pattern to compile
+  [const flags]);             // open flags
+                              // returns rex handle

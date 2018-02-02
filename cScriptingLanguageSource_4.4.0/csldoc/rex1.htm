@@ -1,0 +1,203 @@
+<html><head><title>CSL Reference&nbsp-&nbsp;Regular expression lib.</title>
+<meta name="description" content="Regular expression lib.">
+<meta name="keywords" content="PROGRAMMING CSL C SCRIPT SCRIPTING LANGUAGE IBK ORACLE MYSQL DB2 ODBC VISUALAGE BORLAND VISUAL C++ GCC">
+</head>
+<body leftmargin="10" topmargin="2"
+text="#000000" bgcolor="#FFFFFF" link="#002288" vlink="#444444" alink="#FF2200">
+<div align="center">
+<a name="top"></a>
+<!-- upper -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="150">
+<a href="index.htm"><img src="../img/csl.png" width="97" height="56" border="0"></a>
+</td>
+<td width="300%" align="center" valign="bottom">
+<h1>Regular expression lib.</h1>
+</td>
+<td width="150" align="right">
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td nowrap align="right" valign="top"><font size="-2"><b>
+C&nbsp;Scripting&nbsp;Language<br>
+Reference&nbsp;Manual<br>
+Version&nbsp;4.4.0<br></b>
+<br>&lt;&lt;&nbsp;<a href="mathK.htm">Back</a>&nbsp;&nbsp;<a href="#end">End</a>&nbsp;&nbsp;<a href="rex2.htm">Next</a>&nbsp;&gt;&gt;<br>
+</font>
+</td></tr>
+</table>
+</td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- left column -->
+<tr valign="top">
+<td></td>
+<td>&nbsp;</td>
+<td bgcolor="#E0E0E0" width="150">
+<table cellspacing="0" cellpadding="2" border="0" width="100%">
+<tr>
+<td nowrap bgcolor="#0044AA"><b><font color="#FFFFFF">INDEX</font></b></td>
+</tr>
+<tr>
+<td nowrap><font size="-1">
+<a href="intro1.htm">Introduction</a><br>
+<a href="inst1.htm">Installation</a><br>
+<a href="using1.htm">Using the CSL executive</a><br>
+<a href="lang1.htm">Language</a><br>
+<a href="direct1.htm">Directives</a><br>
+<a href="sys1.htm">System library</a><br>
+<a href="str1.htm">String library</a><br>
+<a href="math1.htm">Math library</a><br>
+<a href="rex1.htm">Regular expression lib.</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex2.htm">Basic matching rules</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex3.htm">Additional syntax specs</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex4.htm">Order of precedence</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex5.htm">rexClose</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex6.htm">rexMatch</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex7.htm">rexOpen</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex8.htm">Sample</a><br>
+<a href="file1.htm">File library</a><br>
+<a href="dax1.htm">Database library</a><br>
+<a href="comm1.htm">Async Communication</a><br>
+<a href="prf1.htm">Registry/Profile handling</a><br>
+<a href="win1.htm">Windows control</a><br>
+<a href="capi1.htm">C API</a><br>
+<a href="api1.htm">C++ Class Interface</a><br>
+<a href="link1.htm">CSL links</a><br>
+</font></td>
+</tr>
+</table>
+</td>
+<!-- main column -->
+<td>&nbsp;&nbsp;</td>
+<td width="300%">
+<p>
+Regular Expressions (REs) are used to determine if a character string
+of interest is matched somewhere in a set of character strings.
+You can specify more than one character string for which you wish to
+determine if a match exists.
+</p><p>
+The functions in this library use regular expressions in a similar way
+to the UNIX <i>awk</i>, <i>ed</i>, <i>grep</i>, and <i>egrep</i> commands.
+</p><p>
+The search for a matching sequence starts at the beginning of the string
+and stops when the first sequence matching the expression is found. The
+first sequence is the one that begins earliest in the string. If the
+pattern permits matching several sequences at this starting point, the
+longest sequence is matched.
+</p><p>
+To use a regular expression, first compile it with <i>rexOpen</i>. You
+can then use <i>rexMatch</i> to compare the compiled expression to several
+strings. When you have finished with the expression, use <i>rexClose</i> to
+free it from memory.
+</p>
+
+<p><font size="+2"><b>Files</b></font></p>
+<dl>
+ <dt>ZcRexLib.dll
+ <dd>The implemented functions<br><br>
+ <dt>ZcRexLib.csl
+ <dd>External declarations used when loading at runtime
+</dl>
+
+<p><font size="+2"><b>Globals</b></font></p>
+<p>
+<table border="0" cellpadding="3" cellspacing="0">
+ <tr bgcolor="#0044AA" valign="top">
+  <td><font color="#FFFFFF"><b>Identifier</b></font></td>
+  <td bgcolor="#0034AA"><font color="#FFFFFF"><b>Description</b></font></td>
+ </tr>
+ <tr bgcolor="#C0E0FF" valign="top">
+  <td>rexVersion</td>
+  <td bgcolor="#B0D0FF">Current version of the library</td>
+ </tr>
+ <tr bgcolor="#E0F0FF" valign="top">
+  <td>rexCompiler</td>
+  <td bgcolor="#D0E0FF">
+   Compiler the library was built by (IBM, BORLAND, MICROSOFT, GNU)
+  </td>
+ </tr>
+ <tr bgcolor="#C0E0FF" valign="top">
+  <td>rexBuilt</td>
+  <td bgcolor="#B0D0FF">Date and time when the library was compiled</td>
+ </tr>
+ <tr bgcolor="#E0F0FF" valign="top">
+  <td>rexLibtype</td>
+  <td bgcolor="#D0E0FF">
+   Interface the library is using (API or NATIVE = C++ class interface)
+  </td>
+ </tr>
+ <tr bgcolor="#C0E0FF" valign="top">
+  <td>
+   rexMatchNotbol<br>
+   rexMatchNoteol
+  </td>
+  <td bgcolor="#B0D0FF">Modes for <i>rexMatch</i></td>
+ </tr>
+ <tr bgcolor="#E0F0FF" valign="top">
+  <td>
+   rexOpenExtended<br>
+   rexOpenIgnorecase<br>
+   rexOpenNewline<br>
+   rexOpenNosubreps
+  </td>
+  <td bgcolor="#D0E0FF">
+   Flags used by <i>rexOpen</i>
+  </td>
+ </tr>
+</table>
+</p>
+
+</td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+</table>
+<!-- lower line -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="25%">
+<font size="-2">Copyright &copy; <A HREF="http://ibk-software.ch">IBK Landquart</font></td>
+<td width="50%" align="center">
+<font size="-2">Last revision: 27.05.2002
+</font></td>
+<td width="25%" align="right">
+<font size="-2">&lt;&lt; <a href="mathK.htm">Back</a>&nbsp;&nbsp;<a href="#top">Top</a>&nbsp;&nbsp;<a href="rex2.htm">Next</a> &gt;&gt;</font></td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table></div>
+<a name="end"></a>
+</body></html>

@@ -1,0 +1,34 @@
+Sample CGI script implemented with CSL
+--------------------------------------
+
+This is not a tutorial in writing CGI scripts. You will find the fundamentals
+about CGI programs at http://hoohoo.ncsa.uiuc.edu/cgi
+
+You need an OS/2 or NT/2000 webserver to run CGI scripts. (If you have either
+VisualAge C++ V4 or DB2 UDB V5, the helpserver enclosed in those packages will
+do for testing purpose. Cgi-bin will be mapped to \IMNNQ_NT or \NETQOS2
+respectively by the helpserver.)
+
+
+File          Description
+------------  --------------------------------------------------------------
+
+cgiform.htm   HTML form to test CGI sample
+
+              Change the "action" argument of the form-tag to the URL of
+              cgi-bin on your web server. The default setting is for the
+              VAC helpserver.
+
+cgiprog.cmd   Sample framework for CGI scripts
+
+              This program should be copied to the cgi-bin directory of
+              your webserver.
+
+              You may have to set the PATH (and maybe BEGINLIBPATH) within
+              this launcher script depending on your webserver, because
+              normally a CGI does not have access to environment vars other
+              than those set by the web server. When using the VAC helpserver
+              this is not necessary.
+
+
+                                                        2/23/2000, P.Koch IBK

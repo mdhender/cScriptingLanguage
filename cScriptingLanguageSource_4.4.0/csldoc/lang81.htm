@@ -1,0 +1,163 @@
+<html><head><title>CSL Reference&nbsp-&nbsp;Exception handling</title>
+<meta name="description" content="Exception handling">
+<meta name="keywords" content="PROGRAMMING CSL C SCRIPT SCRIPTING LANGUAGE IBK ORACLE MYSQL DB2 ODBC VISUALAGE BORLAND VISUAL C++ GCC">
+</head>
+<body leftmargin="10" topmargin="2"
+text="#000000" bgcolor="#FFFFFF" link="#002288" vlink="#444444" alink="#FF2200">
+<div align="center">
+<a name="top"></a>
+<!-- upper -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="150">
+<a href="index.htm"><img src="../img/csl.png" width="97" height="56" border="0"></a>
+</td>
+<td width="300%" align="center" valign="bottom">
+<h1>Exception handling</h1>
+</td>
+<td width="150" align="right">
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td nowrap align="right" valign="top"><font size="-2"><b>
+C&nbsp;Scripting&nbsp;Language<br>
+Reference&nbsp;Manual<br>
+Version&nbsp;4.4.0<br></b>
+<br>&lt;&lt;&nbsp;<a href="langB.htm">Back</a>&nbsp;&nbsp;<a href="#end">End</a>&nbsp;&nbsp;<a href="lang82.htm">Next</a>&nbsp;&gt;&gt;<br>
+</font>
+</td></tr>
+</table>
+</td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- left column -->
+<tr valign="top">
+<td></td>
+<td>&nbsp;</td>
+<td bgcolor="#E0E0E0" width="150">
+<table cellspacing="0" cellpadding="2" border="0" width="100%">
+<tr>
+<td nowrap bgcolor="#0044AA"><b><font color="#FFFFFF">INDEX</font></b></td>
+</tr>
+<tr>
+<td nowrap><font size="-1">
+<a href="intro1.htm">Introduction</a><br>
+<a href="inst1.htm">Installation</a><br>
+<a href="using1.htm">Using the CSL executive</a><br>
+<a href="lang1.htm">Language</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang2.htm">Comments</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang3.htm">Numbers</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang31.htm">Literals</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang41.htm">Var and const</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang5.htm">Operators</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang6.htm">Statements and blocks</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang71.htm">Program flow</a><br>
+&nbsp;&nbsp;&nbsp;<a href="langB.htm">Trace facility</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang81.htm">Exception handling</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="lang82.htm">Between CSL and C</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="lang83.htm">Between CSL and C++</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang91.htm">Functions</a><br>
+&nbsp;&nbsp;&nbsp;<a href="langA.htm">Predefined identifiers</a><br>
+<a href="direct1.htm">Directives</a><br>
+<a href="sys1.htm">System library</a><br>
+<a href="str1.htm">String library</a><br>
+<a href="math1.htm">Math library</a><br>
+<a href="rex1.htm">Regular expression lib.</a><br>
+<a href="file1.htm">File library</a><br>
+<a href="dax1.htm">Database library</a><br>
+<a href="comm1.htm">Async Communication</a><br>
+<a href="prf1.htm">Registry/Profile handling</a><br>
+<a href="win1.htm">Windows control</a><br>
+<a href="capi1.htm">C API</a><br>
+<a href="api1.htm">C++ Class Interface</a><br>
+<a href="link1.htm">CSL links</a><br>
+</font></td>
+</tr>
+</table>
+</td>
+<!-- main column -->
+<td>&nbsp;&nbsp;</td>
+<td width="300%">
+<p>
+Exceptions are handled by <i>try</i>/<i>catch</i>/<i>throw</i> as
+known by C++ and JAVA:
+</p><pre>
+foo()
+{
+  try {
+    ....
+    var exc = { 'error in foo:', 'the message' };
+    throw exc;
+    ....
+  } // try
+  catch (const xx[]) {
+    for (var i = 0; i &lt; sizeof xx; i++)
+      sysLog(xx[i]);
+  } // catch
+} // foo
+</pre><p>
+Unlike C++ there may only be one catch block following the try block.
+The reason is, that there is only one variable type in CSL and it
+makes no sense to define several catch blocks.
+</p><p>
+<i>throw</i> must be followed by an identifier name or an expression
+as argument. The identifier may be any simple <i>var</i>/<i>const</i>,
+or array with any number of dimensions.
+</p><p>
+<i>catch</i> expects an identifier followed by empty braces [ ] as
+parameter. No matter what number of dimensions the thrown value had,
+the caught value will be a one-dimensional array.
+</p>
+
+</td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+</table>
+<!-- lower line -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="25%">
+<font size="-2">Copyright &copy; <A HREF="http://ibk-software.ch">IBK Landquart</font></td>
+<td width="50%" align="center">
+<font size="-2">Last revision: 27.05.2002
+</font></td>
+<td width="25%" align="right">
+<font size="-2">&lt;&lt; <a href="langB.htm">Back</a>&nbsp;&nbsp;<a href="#top">Top</a>&nbsp;&nbsp;<a href="lang82.htm">Next</a> &gt;&gt;</font></td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table></div>
+<a name="end"></a>
+</body></html>

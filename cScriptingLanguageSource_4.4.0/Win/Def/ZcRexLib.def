@@ -1,0 +1,6 @@
+LIBRARY     ZcRexLib
+DESCRIPTION "CSL Regular Expression Library"
+EXPORTS
+            ZCslInitLibAPI
+            ZCslCleanupLibAPI
+

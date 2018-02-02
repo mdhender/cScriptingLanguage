@@ -1,0 +1,7 @@
+LIBRARY     ZcComLib
+DESCRIPTION "CSL Async Communications Library"
+EXPORTS
+            ZCslInitLibAPI
+            ZCslCleanupLibAPI
+
+

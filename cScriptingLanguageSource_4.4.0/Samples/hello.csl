@@ -1,0 +1,6 @@
+#loadLibrary 'ZcSysLib'
+
+main()
+{
+  sysLog("hello world");
+}

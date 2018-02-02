@@ -1,0 +1,214 @@
+<html><head><title>CSL Reference&nbsp-&nbsp;Functions</title>
+<meta name="description" content="Functions">
+<meta name="keywords" content="PROGRAMMING CSL C SCRIPT SCRIPTING LANGUAGE IBK ORACLE MYSQL DB2 ODBC VISUALAGE BORLAND VISUAL C++ GCC">
+</head>
+<body leftmargin="10" topmargin="2"
+text="#000000" bgcolor="#FFFFFF" link="#002288" vlink="#444444" alink="#FF2200">
+<div align="center">
+<a name="top"></a>
+<!-- upper -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="150">
+<a href="index.htm"><img src="../img/csl.png" width="97" height="56" border="0"></a>
+</td>
+<td width="300%" align="center" valign="bottom">
+<h1>Functions</h1>
+</td>
+<td width="150" align="right">
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td nowrap align="right" valign="top"><font size="-2"><b>
+C&nbsp;Scripting&nbsp;Language<br>
+Reference&nbsp;Manual<br>
+Version&nbsp;4.4.0<br></b>
+<br>&lt;&lt;&nbsp;<a href="lang83.htm">Back</a>&nbsp;&nbsp;<a href="#end">End</a>&nbsp;&nbsp;<a href="lang92.htm">Next</a>&nbsp;&gt;&gt;<br>
+</font>
+</td></tr>
+</table>
+</td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- left column -->
+<tr valign="top">
+<td></td>
+<td>&nbsp;</td>
+<td bgcolor="#E0E0E0" width="150">
+<table cellspacing="0" cellpadding="2" border="0" width="100%">
+<tr>
+<td nowrap bgcolor="#0044AA"><b><font color="#FFFFFF">INDEX</font></b></td>
+</tr>
+<tr>
+<td nowrap><font size="-1">
+<a href="intro1.htm">Introduction</a><br>
+<a href="inst1.htm">Installation</a><br>
+<a href="using1.htm">Using the CSL executive</a><br>
+<a href="lang1.htm">Language</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang2.htm">Comments</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang3.htm">Numbers</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang31.htm">Literals</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang41.htm">Var and const</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang5.htm">Operators</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang6.htm">Statements and blocks</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang71.htm">Program flow</a><br>
+&nbsp;&nbsp;&nbsp;<a href="langB.htm">Trace facility</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang81.htm">Exception handling</a><br>
+&nbsp;&nbsp;&nbsp;<a href="lang91.htm">Functions</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="lang92.htm">Static and forward</a><br>
+&nbsp;&nbsp;&nbsp;<a href="langA.htm">Predefined identifiers</a><br>
+<a href="direct1.htm">Directives</a><br>
+<a href="sys1.htm">System library</a><br>
+<a href="str1.htm">String library</a><br>
+<a href="math1.htm">Math library</a><br>
+<a href="rex1.htm">Regular expression lib.</a><br>
+<a href="file1.htm">File library</a><br>
+<a href="dax1.htm">Database library</a><br>
+<a href="comm1.htm">Async Communication</a><br>
+<a href="prf1.htm">Registry/Profile handling</a><br>
+<a href="win1.htm">Windows control</a><br>
+<a href="capi1.htm">C API</a><br>
+<a href="api1.htm">C++ Class Interface</a><br>
+<a href="link1.htm">CSL links</a><br>
+</font></td>
+</tr>
+</table>
+</td>
+<!-- main column -->
+<td>&nbsp;&nbsp;</td>
+<td width="300%">
+<p>
+Functions always have a return type of <i>var</i>. If a function does not
+explicitly return a value, an empty string will be returned. Since each
+function returns a <i>var</i>, it is not necessary to put <i>var</i> in front
+of the function header, although you may do so to indicate that your function
+ought to return something meaningful:
+</p><pre>
+var foo()       // the 'var' is optional
+{
+  return 'hello';
+} // foo
+&nbsp;
+main()
+{
+  const x = foo(); // x = 'hello'
+} // main
+</pre><p>
+The parameter list may have a fixed or variable number of parameters.
+Optional parameters are enclosed in braces [ ]:
+</p><pre>
+ fixParam(var a, var b)
+ // 2 mandatory parameters
+ ...
+&nbsp;
+ varParam(var a, [var b, var c])
+ // 1 mandatory and 2 optional parameters
+ ...
+</pre><p>
+If there are optional parameters, CSL generates a local const named
+<i>argCount</i> holding the passed number of arguments. CSL will
+validate that the number of arguments passed isn't less than the number
+of mandatory parameters and also not bigger than the total number of
+parameters.
+</p><p>
+Your function must validate the number of optional parameters before
+accessing them:
+</p><pre>
+foo(const a, [const b])
+{
+  if (argCount == 2)
+    sysLog('you passed 2 args: '+a+' and '+b);
+  else
+    sysLog('you passed 1 arg: '+a);
+}
+</pre><p>
+If your function doesn't change the arg values you may define them
+<i>const</i> instead of <i>var</i> so they are protected by CSL.
+</p><p>
+CSL also supports parameter passing by reference with the operator
+&amp; (as known by C++). In fact arrays may only be passed by reference
+and not by value:
+</p><pre>
+#loadLibrary 'ZcSysLib'
+&nbsp;
+groom(var&amp; a, var &b[][])
+{
+  const maxDim = 10;
+  a = 'groom';
+  const dim2 = sizeof(b[0]);
+  const dim1 = sizeof(b) / dim2;
+  if (dim1 > maxDim || dim2 > maxDim)
+    throw '%%% groom was designed for dims &lt;= '+maxDim;
+  for (var y = 0; y &lt; dim1; y++)
+    for (var x = 0; x &lt; dim2; x++)
+      b[y][x] = y*dim2+x;
+  return a+' done';
+}
+&nbsp;
+main()
+{
+  var aa;
+  var bb[3][4][5];
+  sysLog(groom(aa, bb[1])); // groom done
+  sysLog(aa);               // groom
+  sysLog(bb[1][2][3]);      // 13
+}
+</pre><p>
+Array-parameters never have an explicit index as you see in the
+example above. If your function imposes restrictions on array size(s),
+it's up to your function to verify that by use of the <i>sizeof</i>
+operator as we did in the example above.
+</p>
+
+</td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+</table>
+<!-- lower line -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="25%">
+<font size="-2">Copyright &copy; <A HREF="http://ibk-software.ch">IBK Landquart</font></td>
+<td width="50%" align="center">
+<font size="-2">Last revision: 27.05.2002
+</font></td>
+<td width="25%" align="right">
+<font size="-2">&lt;&lt; <a href="lang83.htm">Back</a>&nbsp;&nbsp;<a href="#top">Top</a>&nbsp;&nbsp;<a href="lang92.htm">Next</a> &gt;&gt;</font></td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table></div>
+<a name="end"></a>
+</body></html>

@@ -1,0 +1,200 @@
+/* Copyright (c) 2001-2002 IBK-Landquart-Switzerland. All rights reserved.
+ *
+ * Module      :  ZcWinLib.csl
+ * Application :  CSL windows library
+ * Purpose     :  CSL header file
+ *
+ * Date        Description                                 Who
+ * --------------------------------------------------------------------------
+ * 2001.05.30  First implementation                        P.Koch, IBK
+ * 2001.07.07  Renaming from css to csl                    P.Koch, IBK
+ * 2001.10.17  Extended winPostVKey to enable simultaneous P.Koch, IBK
+ *             posting of up to 3 VKeys
+ * 2002.05.26  Release 4.04                                P.Koch, IBK
+ *
+ * OPEN SOURCE LICENSE
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to IBK at info@ibk-software.ch.
+ */
+
+// library info
+
+extern const winVersion;      // library version
+extern const winCompiler;     // compiler used
+extern const winBuilt;        // build date/time
+extern const winLibtype;      // API or NATIVE
+
+// virtual key constants
+
+extern const VK_LBUTTON;
+extern const VK_RBUTTON;
+extern const VK_CANCEL;
+extern const VK_MBUTTON;
+extern const VK_BACK;
+extern const VK_TAB;
+extern const VK_CLEAR;
+extern const VK_RETURN;
+extern const VK_SHIFT;
+extern const VK_CONTROL;
+extern const VK_MENU;
+extern const VK_PAUSE;
+extern const VK_CAPITAL;
+extern const VK_ESCAPE;
+extern const VK_SPACE;
+extern const VK_PRIOR;
+extern const VK_NEXT;
+extern const VK_END;
+extern const VK_HOME;
+extern const VK_LEFT;
+extern const VK_UP;
+extern const VK_RIGHT;
+extern const VK_DOWN;
+extern const VK_SELECT;
+extern const VK_PRINT;
+extern const VK_EXECUTE;
+extern const VK_SNAPSHOT;
+extern const VK_INSERT;
+extern const VK_DELETE;
+extern const VK_HELP;
+extern const VK_LWIN;
+extern const VK_RWIN;
+extern const VK_APPS;
+extern const VK_NUMPAD0;
+extern const VK_NUMPAD1;
+extern const VK_NUMPAD2;
+extern const VK_NUMPAD3;
+extern const VK_NUMPAD4;
+extern const VK_NUMPAD5;
+extern const VK_NUMPAD6;
+extern const VK_NUMPAD7;
+extern const VK_NUMPAD8;
+extern const VK_NUMPAD9;
+extern const VK_MULTIPLY;
+extern const VK_ADD;
+extern const VK_SEPARATOR;
+extern const VK_SUBTRACT;
+extern const VK_DECIMAL;
+extern const VK_DIVIDE;
+extern const VK_F1;
+extern const VK_F2;
+extern const VK_F3;
+extern const VK_F4;
+extern const VK_F5;
+extern const VK_F6;
+extern const VK_F7;
+extern const VK_F8;
+extern const VK_F9;
+extern const VK_F10;
+extern const VK_F11;
+extern const VK_F12;
+extern const VK_F13;
+extern const VK_F14;
+extern const VK_F15;
+extern const VK_F16;
+extern const VK_F17;
+extern const VK_F18;
+extern const VK_F19;
+extern const VK_F20;
+extern const VK_F21;
+extern const VK_F22;
+extern const VK_F23;
+extern const VK_F24;
+extern const VK_NUMLOCK;
+extern const VK_SCROLL;
+extern const VK_LSHIFT;
+extern const VK_RSHIFT;
+extern const VK_LCONTROL;
+extern const VK_RCONTROL;
+extern const VK_LMENU;
+extern const VK_RMENU;
+extern const VK_PROCESSKEY;
+extern const VK_ATTN;
+extern const VK_CRSEL;
+extern const VK_EXSEL;
+extern const VK_EREOF;
+extern const VK_PLAY;
+extern const VK_ZOOM;
+extern const VK_NONAME;
+extern const VK_PA1;
+extern const VK_OEM_CLEAR;
+
+// functions in alfabetical order
+
+var winActivate(               // bring window to foreground
+   const handle);                 // windows handle
+                                  // returns 1
+
+var winClose(                  // close window
+   const handle);                 // windows handle
+                                  // returns 1
+
+var winCapsLock(               // query or change caps lock state
+   [const mode]);                 // none=query, 0=clear, 1=set, 2=toggle
+                                  // returns: true=now on, false=now off
+
+var winFind(                   // find windows by name
+   const name,                    // name or regular expression pattern
+   var &win[][],                  // handle & name of each match
+   [const regular,                // use regular expression (default = false)
+    const level]);                // subwindow search level (default = 0)
+                                  // returns # of matched windows
+
+var winHide(                   // hide window
+   const handle);                 // windows handle
+                                  // returns 1
+
+var winIsMaximized(            // is windows maximized?
+   const handle);                 // windows handle
+                                  // returns true/false
+
+var winIsVisible(              // is windows visible?
+   const handle);                 // windows handle
+                                  // returns true/false
+
+var winMaximize(               // maximize window
+   const handle);                 // windows handle
+                                  // returns 1
+
+var winMinimize(               // minimize window
+   const handle);                 // windows handle
+                                  // returns 1
+
+var winNumLock(                // query or change num lock state
+   [const mode]);                 // none=query, 0=clear, 1=set, 2=toggle
+                                  // returns: true=now on, false=now off
+
+var winPostText(               // post a text
+   const text);                   // text
+                                  // returns 1
+
+var winPostVKey(               // post virtual keys
+   const vkey1,                   // virtual key code VK_....
+   [const vkey2,                  // virtual key code VK_....
+    const vkey3]);                // virtual key code VK_....
+                                  // returns 1
+
+var winPrintScreen(            // copy screen or acrive window to clipboard
+   [const mode]);                 // none/0 = screen, 1=active window
+                                  // returns 1
+
+var winRestore(                // restore window
+   const handle);                 // windows handle
+                                  // returns 1
+
+var winScrollLock(             // query or change scroll lock state
+   [const mode]);                 // none=query, 0=clear, 1=set, 2=toggle
+                                  // returns: true=now on, false=now off
+
+var winShow(                   // show window
+   const handle);                 // windows handle
+                                  // returns 1

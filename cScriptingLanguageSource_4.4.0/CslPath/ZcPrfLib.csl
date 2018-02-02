@@ -1,0 +1,111 @@
+/* Copyright (c) 2001-2002 IBK-Landquart-Switzerland. All rights reserved.
+ *
+ * Module      :  ZcPrfLib.csl
+ * Application :  CSL profile library
+ * Purpose     :  CSL header file
+ *
+ * Date        Description                                 Who
+ * --------------------------------------------------------------------------
+ * 2001.05.31  First implementation                        P.Koch, IBK
+ * 2001.07.07  Renaming from css to csl                    P.Koch, IBK
+ * 2002.05.26  Release 4.04                                P.Koch, IBK
+ *
+ * OPEN SOURCE LICENSE
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to IBK at info@ibk-software.ch.
+ */
+
+// library info
+extern const prfVersion;         // library version
+extern const prfCompiler;        // compiler used
+extern const prfBuilt;           // build date/time
+extern const prfLibtype;         // API or NATIVE
+
+// data types
+extern const prfTypeString;      // string type
+extern const prfTypeBinary;      // binary type
+extern const prfTypeInteger;     // integer type
+extern const prfTypeOther;       // other unsupported type
+extern const prfTypeAuto;        // set type automaticly depending on data
+
+// functions
+
+var prfOpen(                     // open a profile
+   const root,                      // root name
+   [const path]);                   // path name
+                                    // returns a profile handle
+
+var prfOpenSystem(               // open system profile
+   [const path]);                   // path name
+                                    // returns a profile handle
+
+var prfOpenUser(                 // open user profile
+   [const path]);                   // path name
+                                    // returns a profile handle
+
+var prfClose(                    // close profile
+   const handle);                   // profile handle
+                                    // returns 1
+
+var prfPath(                     // query or set path
+   const handle,                    // profile handle
+   [const path]);                   // new path to set
+                                    // returns path
+
+var prfGetKeys(                  // get list of keys in path
+   const handle,                    // profile handle
+   [var& keys[]]);                  // array for key names (def=query count only)
+                                    // returns # of keys found
+
+var prfKeyExists(                // query key in path existence
+   const handle,                    // profile handle
+   [const key]);                    // key (def=''=query path extistence)
+                                    // returns true/false
+
+var prfDeleteKey(                // delete key in path
+   const handle,                    // profile handle
+   const key);                      // key
+                                    // returns 1
+
+var prfGetValues(                // get list of values in path
+   const handle,                    // profile handle
+   [var& values[]]);                // array for value names (def=query count only)
+                                    // returns # of values found
+
+var prfValueType(                // query value type
+   const handle,                    // profile handle
+   [const name]);                   // value name (def=''=standard value)
+                                    // returns value type prfType...
+
+var prfValueExists(              // query value existence
+   const handle,                    // profile handle
+   [const name]);                   // value name (def=''=standard value)
+                                    // returns true/false
+
+var prfGetValue(                 // read value
+   const handle,                    // profile handle
+   [const name]);                   // value name (def=''=standard value)
+                                    // returns value
+
+var prfSetValue(                 // set value
+   const handle,                    // profile handle
+   const data,                      // data to write
+   [const name,                     // value name (def=''=standard value)
+    const type]);                   // type enfocement (def=prfTypeAuto)
+                                    // returns 1
+
+var prfDeleteValue(              // delete value
+   const handle,                    // profile handle
+   [const name]);                   // value name (def=''=standard value)
+                                    // returns 1
+

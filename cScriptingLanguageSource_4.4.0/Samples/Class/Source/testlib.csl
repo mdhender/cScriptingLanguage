@@ -1,0 +1,9 @@
+#loadLibrary 'ZcSysLib'
+#loadLibrary 'MyLib'
+
+main()
+{
+  const x = '   hello world   ';
+  sysLog('('|x|')');
+  sysLog('('|myStrStrip(x)|')');
+}

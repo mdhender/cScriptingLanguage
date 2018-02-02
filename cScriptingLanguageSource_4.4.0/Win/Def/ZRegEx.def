@@ -1,0 +1,8 @@
+LIBRARY     ZRegEx
+DESCRIPTION "Regular expressions for poorly staffed compilers"
+EXPORTS
+        ZRegComp@12
+        ZRegError@16
+        ZRegExec@20
+        ZRegFree@4
+

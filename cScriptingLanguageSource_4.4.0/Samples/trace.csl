@@ -1,0 +1,28 @@
+#loadLibrary 'ZcSysLib'
+
+test(const &arr[])
+{
+  var evens = 0, odds = 0;
+  for (var i = 0; i < sizeof(arr); i++) {
+    #block 'for block'
+    trace 'value = '|arr[i];
+    if (arr[i] % 2) {
+      #block 'odd branch'
+      odds++;
+      trace 'odds = '|odds;
+    } else {
+      #block 'even branch'
+      evens++;
+      trace 'evens = '|evens;
+    }
+  }
+}
+
+main()
+{
+  sysTrace(sysTraceCode);
+  const vals = { 3, 12, 17 };
+  sysTrace(sysTraceInfo);
+  test(vals);
+  sysTrace(sysTraceNone);
+}

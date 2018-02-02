@@ -1,0 +1,7 @@
+#loadLibrary 'ZcSysLib'
+
+main()
+{
+   for (var i=0; i<sizeof(mainArgVals); i++)
+      sysLog(mainArgVals[i]);
+}

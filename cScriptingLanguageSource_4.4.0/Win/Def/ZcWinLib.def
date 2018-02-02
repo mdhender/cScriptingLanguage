@@ -1,0 +1,6 @@
+LIBRARY     ZcWinLib
+DESCRIPTION "CSL Windows Control Library"
+EXPORTS
+            ZCslInitLibAPI
+            ZCslCleanupLibAPI
+

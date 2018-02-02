@@ -1,0 +1,192 @@
+<html><head><title>CSL Reference&nbsp-&nbsp;C++ Class Interface</title>
+<meta name="description" content="C++ Class Interface">
+<meta name="keywords" content="PROGRAMMING CSL C SCRIPT SCRIPTING LANGUAGE IBK ORACLE MYSQL DB2 ODBC VISUALAGE BORLAND VISUAL C++ GCC">
+</head>
+<body leftmargin="10" topmargin="2"
+text="#000000" bgcolor="#FFFFFF" link="#002288" vlink="#444444" alink="#FF2200">
+<div align="center">
+<a name="top"></a>
+<!-- upper -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="150">
+<a href="index.htm"><img src="../img/csl.png" width="97" height="56" border="0"></a>
+</td>
+<td width="300%" align="center" valign="bottom">
+<h1>C++ Class Interface</h1>
+</td>
+<td width="150" align="right">
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td nowrap align="right" valign="top"><font size="-2"><b>
+C&nbsp;Scripting&nbsp;Language<br>
+Reference&nbsp;Manual<br>
+Version&nbsp;4.4.0<br></b>
+<br>&lt;&lt;&nbsp;<a href="capi4L.htm">Back</a>&nbsp;&nbsp;<a href="#end">End</a>&nbsp;&nbsp;<a href="api2.htm">Next</a>&nbsp;&gt;&gt;<br>
+</font>
+</td></tr>
+</table>
+</td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- left column -->
+<tr valign="top">
+<td></td>
+<td>&nbsp;</td>
+<td bgcolor="#E0E0E0" width="150">
+<table cellspacing="0" cellpadding="2" border="0" width="100%">
+<tr>
+<td nowrap bgcolor="#0044AA"><b><font color="#FFFFFF">INDEX</font></b></td>
+</tr>
+<tr>
+<td nowrap><font size="-1">
+<a href="intro1.htm">Introduction</a><br>
+<a href="inst1.htm">Installation</a><br>
+<a href="using1.htm">Using the CSL executive</a><br>
+<a href="lang1.htm">Language</a><br>
+<a href="direct1.htm">Directives</a><br>
+<a href="sys1.htm">System library</a><br>
+<a href="str1.htm">String library</a><br>
+<a href="math1.htm">Math library</a><br>
+<a href="rex1.htm">Regular expression lib.</a><br>
+<a href="file1.htm">File library</a><br>
+<a href="dax1.htm">Database library</a><br>
+<a href="comm1.htm">Async Communication</a><br>
+<a href="prf1.htm">Registry/Profile handling</a><br>
+<a href="win1.htm">Windows control</a><br>
+<a href="capi1.htm">C API</a><br>
+<a href="api1.htm">C++ Class Interface</a><br>
+&nbsp;&nbsp;&nbsp;<a href="api2.htm">Embedding CSL</a><br>
+&nbsp;&nbsp;&nbsp;<a href="api3.htm">Writing libraries</a><br>
+&nbsp;&nbsp;&nbsp;<a href="api41.htm">Class interface reference</a><br>
+<a href="link1.htm">CSL links</a><br>
+</font></td>
+</tr>
+</table>
+</td>
+<!-- main column -->
+<td>&nbsp;&nbsp;</td>
+<td width="300%">
+<p>
+The C++ class interface is based on the IBK ZClass library which is part
+of the CSL package and can be used together with most other class
+libraries without conflicts. It is currently available for following
+configurations:
+</p><p>
+<table border="0" cellpadding="3" cellspacing="0">
+ <tr bgcolor="#0044AA" valign="top">
+  <td><font color="#FFFFFF"><b>Compiler</b></font></td>
+  <td bgcolor="#0034AA"><font color="#FFFFFF"><b>Version(s)</b></font></td>
+  <td><font color="#FFFFFF"><b>Sample dir</b></font></td>
+ </tr>
+ <tr bgcolor="#E0F0FF" valign="top">
+  <td>IBM VisualAge C++ for OS/2</td>
+  <td bgcolor="#D0E0FF">3.0.8</td>
+  <td>.\Samples\Class\Os2\Ibm</td>
+ </tr>
+ <tr bgcolor="#C0E0FF" valign="top">
+  <td>IBM VisualAge C++  for Windows</td>
+  <td bgcolor="#B0D0FF">3.5.9</td>
+  <td>.\Samples\Class\Win\Ibm</td>
+ </tr>
+ <tr bgcolor="#E0F0FF" valign="top">
+  <td>Microsoft Visual C++</td>
+  <td bgcolor="#D0E0FF">5.0</td>
+  <td>.\Samples\Class\Win\Microsoft</td>
+ </tr>
+ <tr bgcolor="#C0E0FF" valign="top">
+  <td>Borland C++ (free commandline tools)</td>
+  <td bgcolor="#B0D0FF">5.5</td>
+  <td>.\Samples\Class\Win\Borland</td>
+ </tr>
+ <tr bgcolor="#E0F0FF" valign="top">
+  <td>GNU GCC on unixish systems</td>
+  <td bgcolor="#D0E0FF">2.95.2</td>
+  <td>./Samples/Class/Unix/Gnu</td>
+ </tr>
+</table>
+</p><p>
+The binary distributions for Windows and OS/2 include only the class library
+for IBM VisualAge C++. If you have a Borland or Microsoft compiler you must
+build the class library first. See Readme.txt in .\Win\Borland or .\Win\Microsoft
+respectively for instructions.
+</p><p>
+Although the class library works fine with GCC on Linux, this is not the case
+for 2.95.2 on Windows. It seems exceptions cannot be handled across dll's:
+Throwing an exception in a dll and not catching it in the same dll will make
+GNU terminate the program with SIGABORT instead of passing the exception to
+the calling dll or exe.
+</p><p>
+In fact there are 2 implementations of the CSL class interface:
+</p><p>
+<ul>
+ <li>If you include <i>ZCsl.hpp</i> you are working directly with the CSL kernel.
+     I call this the NATIVE interface.
+     It requires however that the CSL kernel and your application are
+     built with the same compiler. This is the directest interface to CSL.<br>
+     <br>
+ <li>If you include <i>ZCslWrap.hpp</i> instead, every call will be redirected
+     to the C API, which in turn will call the native interface. This allows
+     mixed compiler configurations. There is an additional overhead by this
+     interface, but in practice you'll hardly recognize a difference. The
+     libraries of the binary windows distribution are built with this interface.
+</ul>
+</p><p>
+I'm sorry but the documentation of the ZClass library is still in my queue. Don't
+know when I will find time to do it (any volunteers?). You may help yourself by
+consulting the header files and source.
+</p>
+
+</td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+</table>
+<!-- lower line -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="25%">
+<font size="-2">Copyright &copy; <A HREF="http://ibk-software.ch">IBK Landquart</font></td>
+<td width="50%" align="center">
+<font size="-2">Last revision: 27.05.2002
+</font></td>
+<td width="25%" align="right">
+<font size="-2">&lt;&lt; <a href="capi4L.htm">Back</a>&nbsp;&nbsp;<a href="#top">Top</a>&nbsp;&nbsp;<a href="api2.htm">Next</a> &gt;&gt;</font></td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table></div>
+<a name="end"></a>
+</body></html>

@@ -1,0 +1,9 @@
+#loadLibrary 'ZcSysLib'
+#loadLibrary 'MyLib'
+
+main()
+{
+   sysLog(
+      'The average of 5, 7, 12 is '|average(5,7,12)
+   );
+}

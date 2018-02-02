@@ -1,0 +1,201 @@
+<html><head><title>CSL Reference&nbsp-&nbsp;Additional syntax specs</title>
+<meta name="description" content="Additional syntax specs">
+<meta name="keywords" content="PROGRAMMING CSL C SCRIPT SCRIPTING LANGUAGE IBK ORACLE MYSQL DB2 ODBC VISUALAGE BORLAND VISUAL C++ GCC">
+</head>
+<body leftmargin="10" topmargin="2"
+text="#000000" bgcolor="#FFFFFF" link="#002288" vlink="#444444" alink="#FF2200">
+<div align="center">
+<a name="top"></a>
+<!-- upper -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="150">
+<a href="index.htm"><img src="../img/csl.png" width="97" height="56" border="0"></a>
+</td>
+<td width="300%" align="center" valign="bottom">
+<h1>Additional syntax specs</h1>
+</td>
+<td width="150" align="right">
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td nowrap align="right" valign="top"><font size="-2"><b>
+C&nbsp;Scripting&nbsp;Language<br>
+Reference&nbsp;Manual<br>
+Version&nbsp;4.4.0<br></b>
+<br>&lt;&lt;&nbsp;<a href="rex2.htm">Back</a>&nbsp;&nbsp;<a href="#end">End</a>&nbsp;&nbsp;<a href="rex4.htm">Next</a>&nbsp;&gt;&gt;<br>
+</font>
+</td></tr>
+</table>
+</td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- left column -->
+<tr valign="top">
+<td></td>
+<td>&nbsp;</td>
+<td bgcolor="#E0E0E0" width="150">
+<table cellspacing="0" cellpadding="2" border="0" width="100%">
+<tr>
+<td nowrap bgcolor="#0044AA"><b><font color="#FFFFFF">INDEX</font></b></td>
+</tr>
+<tr>
+<td nowrap><font size="-1">
+<a href="intro1.htm">Introduction</a><br>
+<a href="inst1.htm">Installation</a><br>
+<a href="using1.htm">Using the CSL executive</a><br>
+<a href="lang1.htm">Language</a><br>
+<a href="direct1.htm">Directives</a><br>
+<a href="sys1.htm">System library</a><br>
+<a href="str1.htm">String library</a><br>
+<a href="math1.htm">Math library</a><br>
+<a href="rex1.htm">Regular expression lib.</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex2.htm">Basic matching rules</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex3.htm">Additional syntax specs</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex4.htm">Order of precedence</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex5.htm">rexClose</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex6.htm">rexMatch</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex7.htm">rexOpen</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex8.htm">Sample</a><br>
+<a href="file1.htm">File library</a><br>
+<a href="dax1.htm">Database library</a><br>
+<a href="comm1.htm">Async Communication</a><br>
+<a href="prf1.htm">Registry/Profile handling</a><br>
+<a href="win1.htm">Windows control</a><br>
+<a href="capi1.htm">C API</a><br>
+<a href="api1.htm">C++ Class Interface</a><br>
+<a href="link1.htm">CSL links</a><br>
+</font></td>
+</tr>
+</table>
+</td>
+<!-- main column -->
+<td>&nbsp;&nbsp;</td>
+<td width="300%">
+<p>
+You can also use other syntax within an RE to control what it matches:
+</p>
+<dl>
+ <dt>\(expression\)
+ <dd>Matches whatever expression matches. You only need to enclose an expression
+     in these delimiters to use operators (such as * or +) on it and to denote
+     subexpressions for back referencing (explained later in this section). For EREs,
+     use the parentheses without the backslashes: <tt>(subexpression)</tt><br><br>
+ <dt>\n
+ <dd>Matches the same string that was matched by the nth preceding expression enclosed
+     in <tt>\( \)</tt> or, for EREs, <tt>( )</tt>. This is called a back reference. n can
+     be 1 through 9. For example, <tt>\(ab\)\1</tt> matches abab, but does not match ac.
+     If fewer than n subexpressions precede \n, the back reference is not valid.<br>&nbsp;<br>
+     <table bordercolor="#000000" border="1" cellspacing="0" cellpadding="6">
+     <tr bgcolor="#FFFFDD"><td><font size="-1">
+     <b>NOTE:</b> You cannot use back references in EREs.
+     </font></td></tr></table><br>
+ <dt>expression*
+ <dd>Matches zero or more consecutive occurrences of what expression matches. <i>expression</i>
+     can be a single character or collating symbol, a subexpression, or a back reference
+     (for BREs). For example, <tt>[ab]*</tt> matches ab and ababab; b*cd matches characters 3
+     to 7 of <tt>cabbbcdeb</tt>.<br><br>
+ <dt>expression\{m\}
+ <dd>Matches exactly m occurrences of what <i>expression</i> matches. <i>expression</i> can
+     be a single character or collating symbol, a subexpression, or a back reference (for BREs).
+     For example, <tt>c\{3\}</tt> matches characters 5 through 7 of <tt>ababccccd</tt> (the
+     first 3 c characters only). For EREs, use the braces without the backslashes: <tt>{m}</tt>
+     <br><br>
+ <dt>expression\{m,\}
+ <dd>Matches at least m occurrences of what <i>expression</i> matches. <i>expression</i> can
+     be a single character or collating symbol, a subexpression, or a back reference
+     (for BREs). For example, <tt>\(ab\)\{3,\}</tt> matches <tt>abababab</tt>, but does not
+     match <tt>ababac</tt>. For EREs, use the braces without the backslashes: <tt>{m,}</tt>
+     <br><br>
+ <dt>expression\{m,u\}
+ <dd>Matches any number of occurrences, between m and u inclusive, of what <i>expression</i>
+     matches. <i>expression</i> can be a single character or collating symbol, a
+     subexpression, or a back reference (for BREs). For example, <tt>bc\{1,3\}</tt> matches
+     characters 2 through 4 of <tt>abccd</tt> and characters 3 through 6 of <tt>abbcccccd</tt>
+     For EREs, use the braces without the backslashes: <tt>{m,u}</tt>
+     <br><br>
+ <dt>^expression
+ <dd>Matches only sequences that match <i>expression</i> that start at the first character
+     of a string or after a new-line character if the <i>rexOpenNewline</i> flag was specified.
+     For example, <tt>^ab</tt> matches <tt>ab</tt> in the string <tt>abcdef</tt>, but does not
+     match it in the string <tt>cdefab</tt>. The expression can be the entire RE or any
+     subexpression of it.<br><br>
+ <dt>expression$
+ <dd>Matches only sequences that match <i>expression</i> that end the string or that precede
+     the new-line character if the <i>rexOpenNewline</i> flag was specified. For example,
+     <tt>ab$</tt> matches <tt>ab</tt> in the string <tt>cdefab</tt> but does not match it
+     in the string <tt>abcdef</tt>. The expression must be the entire RE.<br><br>
+ <dt>^expression$
+ <dd>Matches only an entire string, or an entire line if the <i>rexOpenNewline</i> flag was
+     specified. For example, <tt>^abcde$</tt> matches only <tt>abcde</tt>.
+</dl>
+<p>
+In addition to those listed above, you can also use the following specifiers for EREs
+(they are not valid for BREs):
+</p>
+<dl>
+ <dt>expression+
+ <dd>Matches what one or more occurrences of <i>expression</i> matches. For example,
+     <tt>a+(bc)</tt> matches <tt>aaaaabc</tt>; <tt>(bc)+</tt> matches characters 1
+     through 6 of <tt>bcbcbcbb</tt>.<br><br>
+ <dt>expression?
+ <dd>Matches zero or one consecutive occurrences of what <i>expression</i> matches.
+     For example, <tt>b?c</tt> matches character 2 of <tt>acabbb</tt> (zero occurrences
+     of b followed by c).<br><br>
+ <dt>expression|expression
+ <dd>Matches a string that matches either <i>expression</i>. For example, <tt>a((bc)|d)</tt>
+     matches both <tt>abc</tt> and <tt>ad</tt>.
+</dl>
+
+</td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+</table>
+<!-- lower line -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="25%">
+<font size="-2">Copyright &copy; <A HREF="http://ibk-software.ch">IBK Landquart</font></td>
+<td width="50%" align="center">
+<font size="-2">Last revision: 27.05.2002
+</font></td>
+<td width="25%" align="right">
+<font size="-2">&lt;&lt; <a href="rex2.htm">Back</a>&nbsp;&nbsp;<a href="#top">Top</a>&nbsp;&nbsp;<a href="rex4.htm">Next</a> &gt;&gt;</font></td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table></div>
+<a name="end"></a>
+</body></html>

@@ -1,0 +1,205 @@
+<html><head><title>CSL Reference&nbsp-&nbsp;Writing libraries</title>
+<meta name="description" content="Writing libraries">
+<meta name="keywords" content="PROGRAMMING CSL C SCRIPT SCRIPTING LANGUAGE IBK ORACLE MYSQL DB2 ODBC VISUALAGE BORLAND VISUAL C++ GCC">
+</head>
+<body leftmargin="10" topmargin="2"
+text="#000000" bgcolor="#FFFFFF" link="#002288" vlink="#444444" alink="#FF2200">
+<div align="center">
+<a name="top"></a>
+<!-- upper -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="150">
+<a href="index.htm"><img src="../img/csl.png" width="97" height="56" border="0"></a>
+</td>
+<td width="300%" align="center" valign="bottom">
+<h1>Writing libraries</h1>
+</td>
+<td width="150" align="right">
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td nowrap align="right" valign="top"><font size="-2"><b>
+C&nbsp;Scripting&nbsp;Language<br>
+Reference&nbsp;Manual<br>
+Version&nbsp;4.4.0<br></b>
+<br>&lt;&lt;&nbsp;<a href="api2.htm">Back</a>&nbsp;&nbsp;<a href="#end">End</a>&nbsp;&nbsp;<a href="api41.htm">Next</a>&nbsp;&gt;&gt;<br>
+</font>
+</td></tr>
+</table>
+</td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- left column -->
+<tr valign="top">
+<td></td>
+<td>&nbsp;</td>
+<td bgcolor="#E0E0E0" width="150">
+<table cellspacing="0" cellpadding="2" border="0" width="100%">
+<tr>
+<td nowrap bgcolor="#0044AA"><b><font color="#FFFFFF">INDEX</font></b></td>
+</tr>
+<tr>
+<td nowrap><font size="-1">
+<a href="intro1.htm">Introduction</a><br>
+<a href="inst1.htm">Installation</a><br>
+<a href="using1.htm">Using the CSL executive</a><br>
+<a href="lang1.htm">Language</a><br>
+<a href="direct1.htm">Directives</a><br>
+<a href="sys1.htm">System library</a><br>
+<a href="str1.htm">String library</a><br>
+<a href="math1.htm">Math library</a><br>
+<a href="rex1.htm">Regular expression lib.</a><br>
+<a href="file1.htm">File library</a><br>
+<a href="dax1.htm">Database library</a><br>
+<a href="comm1.htm">Async Communication</a><br>
+<a href="prf1.htm">Registry/Profile handling</a><br>
+<a href="win1.htm">Windows control</a><br>
+<a href="capi1.htm">C API</a><br>
+<a href="api1.htm">C++ Class Interface</a><br>
+&nbsp;&nbsp;&nbsp;<a href="api2.htm">Embedding CSL</a><br>
+&nbsp;&nbsp;&nbsp;<a href="api3.htm">Writing libraries</a><br>
+&nbsp;&nbsp;&nbsp;<a href="api41.htm">Class interface reference</a><br>
+<a href="link1.htm">CSL links</a><br>
+</font></td>
+</tr>
+</table>
+</td>
+<!-- main column -->
+<td>&nbsp;&nbsp;</td>
+<td width="300%">
+<p>
+Writing a CSL library is easy and gives you the opportunity to provide
+a professional script interface to your application.
+</p><p>
+You should make yourself familiar with the concept of DLL's or shared libraries
+in your compiler documentation. For your convenience you can consult the files
+<i>build.bat</i> / <i>build.cmd</i> / <i>build</i> in the <i>Samples\Class</i>
+subdirectories to see what compiler and linker switches are required.
+</p><p>
+Your library must export 2 entries: <i>ZCslInitLib</i> and <i>ZCslCleanupLib</i>.
+</p><p>
+<i>ZCslInitLib</i> is called when the DLL gets loaded. You use the API to
+define global var's and const's and load functions at startup. <i>ZCslCleanupLib</i>
+will be called when the DLL is unloaded so you can perform any tidy up before
+the CSL handle is closed.
+</p><p>
+You will find this sample library <i>MyLib.cpp</i> in the
+<i>Samples\Class\Source</i> directory. Use the sample as a starting point
+for your own DLL's:
+</p><pre>
+#include &lt;ZBase.h&gt;  // load ZC_.... defines
+&nbsp;
+#if ZC_GNU
+  #include &lt;strstream.h&gt;
+#else
+  #include &lt;strstrea.h&gt;
+#endif
+&nbsp;
+#if ZC_WIN
+  #include &lt;ZCslWrap.hpp&gt;
+#else
+  #include &lt;ZCsl.hpp&gt;
+#endif
+&nbsp;
+static ZString myStrStrip(ZCsl* csl)
+{
+   return csl->get(&quot;string&quot;).strip();
+} // myStrStrip
+&nbsp;
+static ZString mySubString(ZCsl* csl)
+{
+   int argc = csl->get(&quot;argCount&quot;).asInt();
+   switch (argc) {
+      case 2:
+         return csl->get(&quot;string&quot;).subString(
+                   csl->get(&quot;start&quot;).asInt()
+                );
+      case 3:
+         return csl->get(&quot;string&quot;).subString(
+                   csl->get(&quot;start&quot;).asInt(),
+                   csl->get(&quot;count&quot;).asInt()
+                );
+      default:
+         return csl->get(&quot;string&quot;).subString(
+                   csl->get(&quot;start&quot;).asInt(),
+                   csl->get(&quot;count&quot;).asInt(),
+                   csl->get(&quot;padchar&quot;)[1]
+                );
+   } // switch
+} // mySubString
+&nbsp;
+ZCslInitLib(csl)
+{
+   ZString iFile(&quot;MyLib&quot;);
+   istrstream init(&quot;const myVersion = 0.1;\n&quot;);
+   csl->loadScript(iFile, &init);
+   (*csl)
+      .addFunc(
+          iFile,
+          &quot;myStrStrip(const string)&quot;,
+          myStrStrip)
+      .addFunc(
+          iFile,
+          &quot;mySubString(const string, const start, [const count, const padchar])&quot;,
+          mySubString);
+} // ZCslInitLib
+&nbsp;
+ZCslCleanupLib(aCsl)
+{
+   // nothing to cleanup in this sample
+} // ZCslCleanupLib
+</pre>
+
+</td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+</table>
+<!-- lower line -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="25%">
+<font size="-2">Copyright &copy; <A HREF="http://ibk-software.ch">IBK Landquart</font></td>
+<td width="50%" align="center">
+<font size="-2">Last revision: 27.05.2002
+</font></td>
+<td width="25%" align="right">
+<font size="-2">&lt;&lt; <a href="api2.htm">Back</a>&nbsp;&nbsp;<a href="#top">Top</a>&nbsp;&nbsp;<a href="api41.htm">Next</a> &gt;&gt;</font></td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table></div>
+<a name="end"></a>
+</body></html>

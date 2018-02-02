@@ -1,0 +1,5 @@
+LIBRARY     MyLib
+DESCRIPTION "CSL Sample Library"
+EXPORTS
+            ZCslInitLibAPI
+            ZCslCleanupLibAPI

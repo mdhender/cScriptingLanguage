@@ -1,0 +1,57 @@
+#loadLibrary 'ZcSysLib'
+#loadLibrary 'ZcStrLib'
+#loadLibrary 'ZcDaxLib'
+
+main()
+{
+  // check arguments
+  if (sizeof(mainArgVals) < 4) {
+    const exc[3] = {
+      'usage  : csl unknown [db:]name/password@connection tablename',
+      ' ',
+      'example: csl unknown DB2:SCOTT/TIGER@SALES EMP'
+    };
+    throw exc;
+  }
+
+  // connect
+  var name, pass, conn, db, a = 2;
+  name = strSplitConnectString(mainArgVals[a++],pass,conn,db);
+  if (db == '') db = 'MYSQL'; // default db
+  var lnk = daxConnect(db,conn,name,pass);
+
+  // start processing
+  var csr = daxParse(lnk, 'select * from '|mainArgVals[a]|' order by 1');
+  var cols = daxSelectColumns(csr);
+  var line, size[cols];
+
+  // display title
+  for (var i=0; i<cols; i++) {
+    size[i] = daxSelectColumnSize(csr,i);
+    line |=
+      strLeftJustify(
+        strSubString(daxSelectColumnName(csr,i),1,size[i]),
+        size[i]+1
+      );
+  } // for
+  sysLog(line);
+
+  // underline title
+  line = '';
+  for (i=0; i<cols; i++)
+    line |= strLeftJustify('',size[i],'-')|' ';
+  sysLog(line);
+
+  // query and display the rows
+  var col[cols];
+  while (daxFetch(csr, col)) {
+    line = '';
+    for (i=0; i<cols; i++)
+      line |= strLeftJustify(col[i],size[i])|' ';
+    sysLog(line);
+  } // while
+
+  sysLog();
+  sysLog(daxRowsProcessed(csr)|' row(s) selected');
+  daxDisconnect(lnk);
+} // main

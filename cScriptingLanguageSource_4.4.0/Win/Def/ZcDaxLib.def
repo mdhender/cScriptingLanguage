@@ -1,0 +1,7 @@
+LIBRARY     ZcDaxLib
+DESCRIPTION "CSL Database Access Library"
+EXPORTS
+            ZCslInitLibAPI
+            ZCslCleanupLibAPI
+
+

@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>Sample Test Form</title>
+  </head>
+  <body>
+    This is a sample test form to demonstrate how CGI scripts
+    may be implemented in CSL.<br><br>
+
+    <hr>
+    <form method="post" action="http://localhost:49213/cgi-bin/cgiprog">
+      <table>
+        <tr>
+          <td>User:</td>
+          <td><input type=text name="user" size="30"></td>
+        </tr>
+        <tr>
+          <td>Homepage:</td>
+          <td><input type=text name="homepage" size="50"></td>
+        </tr>
+        <tr>
+          <td>E-Mail:</td>
+          <td><input type=text name="email" size="30"></td>
+        </tr>
+        <tr>
+          <td><input type=submit name="Submit Form"></td>
+          <td><input type=reset name="Reset Form"></td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

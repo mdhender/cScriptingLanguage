@@ -1,0 +1,6 @@
+LIBRARY     ZcSysLib
+DESCRIPTION "CSL System Library"
+EXPORTS
+            ZCslInitLibAPI
+            ZCslCleanupLibAPI
+

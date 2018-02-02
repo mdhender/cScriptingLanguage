@@ -1,0 +1,72 @@
+#loadLibrary 'ZcSysLib'
+#loadLibrary 'ZcStrLib'
+#loadLibrary 'ZcDaxLib'
+
+main()
+{
+  // check arguments
+  if (sizeof(mainArgVals) < 3) {
+    const exc[3] = {
+      'usage  : csl toys name/password@connection',
+      ' ',
+      'example: csl toys SCOTT/TIGER@SALES'
+    };
+    throw exc;
+  } // if
+
+  sysLog('connect');
+  var name, pass, conn, a = 2;
+  name = strSplitConnectString(mainArgVals[a],pass,conn);
+  var link = daxConnect('db2',conn,name,pass);
+
+  try {
+    sysLog('drop old table');
+    daxSimple(link, "drop table csstest");
+    daxCommit(link);
+  } // try
+  catch (var exc[]) {
+    sysLog('no old table to drop');
+  } // catch
+
+  daxSimple(link,
+    "create table csstest ( "
+       "ident integer, "
+       "descr varchar(30) "
+    ")"
+  );
+
+  sysLog('insert rows');
+  var toys = {
+    1, 'barbie',
+   12, 'football',
+  325, 'tomb raider II',
+   18, 'flipper'
+  };
+  var csr = daxParse(link,
+              "insert into csstest(ident,descr) "
+              "values (#, #30)"
+            );
+  daxSupply(csr,toys);
+  daxDone(csr);
+  daxDispose(csr);
+  daxCommit(link);
+
+  sysLog(
+    '# of rows in csstest is '+
+    daxSimple(link, "select count(*) from csstest")
+  );
+
+  sysLog('query rows');
+  csr = daxParse(link,
+    "select ident, descr from csstest "
+     "where ident between #6 and #6 "
+     "order by ident"
+  );
+  var vals = { 10, 1000 };
+  daxSupply(csr, vals);
+  while (daxFetch(csr, vals))
+    sysLog(vals[0]+' - '+vals[1]);
+
+  sysLog('disconnect');
+  daxDisconnect(link);
+} // main

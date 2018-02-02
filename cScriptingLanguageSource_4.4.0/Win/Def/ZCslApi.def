@@ -1,0 +1,27 @@
+LIBRARY     ZCslApi
+DESCRIPTION "CSL Kernel API"
+EXPORTS
+            ZCslOpen
+            ZCslClose
+            ZCslSet
+            ZCslGet
+            ZCslVarSizeof
+            ZCslVarResize
+            ZCslLoadScriptMem
+            ZCslLoadScriptFile
+            ZCslLoadLibrary
+            ZCslCall
+            ZCslCallEx
+            ZCslGetResult
+            ZCslAddFunc
+            ZCslAddVar
+            ZCslSetResult
+            ZCslSetError
+            ZCslStartDateTime
+            ZCslTraceMode
+            ZCslSetTraceMode
+            ZCslTrace
+            ZCslShow
+            ZCslGetError
+
+

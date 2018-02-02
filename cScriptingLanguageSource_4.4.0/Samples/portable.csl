@@ -1,0 +1,89 @@
+#loadLibrary 'ZcSysLib'
+#loadLibrary 'ZcStrLib'
+#loadLibrary 'ZcDaxLib'
+
+main()
+{
+  // check arguments
+  if (sizeof(mainArgVals) < 3) {
+    const exc[3] = {
+      'usage  : csl portable db:name/password@connection',
+      '         (db defaults to MYSQL)',
+      'example: csl portable @test'
+    };
+    throw exc;
+  }
+
+  sysLog('connect');
+  var db, name, pass, conn, a = 2;
+  name = strSplitConnectString(mainArgVals[a],pass,conn,db);
+  if (db == '') db = 'MYSQL';
+  var link, integer, varchar;
+  switch (db) {
+    case 'DB2':
+    case 'MYSQL':
+    case 'ODBC':
+      varchar = 'varchar';
+      integer = 'integer';
+      break;
+    case 'ORACLE':
+      varchar = 'varchar2';
+      integer = 'number(6)';
+      break;
+    default:
+      throw '%%% unknown db: '|db;
+  } // switch
+  link = daxConnect(db, conn, name, pass);
+  sysLog('connected to '|daxDatabase(link));
+
+  try {
+    sysLog('drop old table');
+    daxSimple(link, 'drop table csstest');
+    daxCommit(link);
+  }
+  catch (var exc[]) {
+    sysLog('no old table to drop');
+  }
+
+  daxSimple(link,
+    'create table csstest ( '
+       'ident '|integer|', '
+       'descr '|varchar|'(30)'
+    ')'
+  );
+
+  sysLog('insert rows');
+  var toys = {
+    1, 'barbie',
+   12, 'football',
+  325, 'tomb raider II',
+   18, 'flipper'
+  };
+  var csr = daxParse(link,
+              'insert into csstest(ident,descr) '
+              'values (#, #30)'
+            );
+  daxSupply(csr,toys);
+  daxDone(csr);
+  daxDispose(csr);
+  daxCommit(link);
+
+  sysLog(
+    '# of rows in csstest is '|
+    daxSimple(link, 'select count(*) from csstest')
+  );
+
+  sysLog('query rows');
+  csr = daxParse(link,
+    'select ident, descr from csstest '
+     'where ident between # and # '
+     'order by ident'
+  );
+  var vals = { 10, 1000 };
+  daxSupply(csr, vals);
+  while (daxFetch(csr, vals))
+    sysLog(vals[0]|' - '|vals[1]);
+
+  sysLog('disconnect');
+  daxDisconnect(link);
+}

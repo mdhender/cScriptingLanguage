@@ -1,0 +1,6 @@
+LIBRARY     ZcMathLb
+DESCRIPTION "CSL Math Library"
+EXPORTS
+            ZCslInitLibAPI
+            ZCslCleanupLibAPI
+

@@ -1,0 +1,98 @@
+# Copyright (c) 2001 IBK-Landquart-Switzerland. All rights reserved.
+#
+# Module      :  Makeprog
+# Application :  IBK Open Class Library
+# Purpose     :  Generic makefile for exe build
+#
+# Date        Description                                 Who
+# --------------------------------------------------------------------------
+# 2001.06.06  First implemention                          P.Koch, IBK
+#
+# OPEN SOURCE LICENSE
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 2 as published by
+# the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+# more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to IBK at info@ibk-software.ch.
+
+INCLUDE = $(INCDIR);$(SRCDIR);$(INCLUDE)
+LIB     = $(LIBDIR);$(LIB)
+
+!ifdef TRACE
+CDEFS = /DZC_TRACE_DEVELOP $(CDEFS)
+!endif
+
+!ifdef DEBUG
+CFLAGS=$(CDEFS) -qnolonglong /Q /Gm /Ti /Gf- /Fo".\%|fF.obj" /C
+LFLAGS=/de /nobrowse /nologo /code:RX /data:RW
+!else
+CFLAGS=$(CDEFS) -qnolonglong /Q /Gm /O /Gf- /Fo".\%|fF.obj" /C
+LFLAGS=/nodebug /nobrowse /nologo /code:RX /data:RW
+!endif
+
+.SUFFIXES: .obj .cpp .exe .rc .res
+
+# rules for copying files
+
+.exe{$(BINDIR)}.exe:
+  @echo copy to $@
+  @copy /y $< $@ >nul
+
+.exe{$(IBINDIR)}.exe:
+  @echo copy to $@
+  @copy /y $< $@ >nul
+
+# rules for compiling
+
+{$(SRCDIR)}.cpp.obj:
+  @echo compile $<
+  @icc $(CFLAGS) $<
+
+{$(SRCDIR)}.rc.res:
+  @irc -fo$@ $<
+
+{$(ICONDIR)}.rc.res:
+  @irc -fo$@ $<
+
+#explicit rules
+
+all : $(TARGETDIRS) $(TARGETS)
+
+$(TARGETDIRS) :
+  !@if not exist $* md $*
+
+$(BINDIR)\$(TARGET).exe : $(TARGET).exe
+
+$(IBINDIR)\$(TARGET).exe : $(TARGET).exe
+
+$(TARGET).exe : $(OBJECTS) $(TARGET).res
+  @echo linking $@
+  @icc /Q @<<
+   /B" $(LFLAGS)"
+   /B" /def"
+   /Fe$@
+   $(OBJECTS) $(LIBRARIES)
+   $(TARGET).res
+<<
+
+$(TARGET).res : $(ICONDIR)\$(TARGET).rc
+
+$(OBJECTS): $(INCLUDES) makefile
+
+CLEANUPS = \
+  $(CLEANUPS) \
+  $(OBJECTS) \
+  $(TARGET).exe \
+  $(TARGET).res \
+  $(TARGET).map \
+  $(TARGET).rbj
+
+clean :
+  @for %%f in ($(CLEANUPS)) do @if exist %%f del %%f

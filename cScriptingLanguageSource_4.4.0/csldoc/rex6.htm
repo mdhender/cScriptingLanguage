@@ -1,0 +1,196 @@
+<html><head><title>CSL Reference&nbsp-&nbsp;rexMatch</title>
+<meta name="description" content="rexMatch">
+<meta name="keywords" content="PROGRAMMING CSL C SCRIPT SCRIPTING LANGUAGE IBK ORACLE MYSQL DB2 ODBC VISUALAGE BORLAND VISUAL C++ GCC">
+</head>
+<body leftmargin="10" topmargin="2"
+text="#000000" bgcolor="#FFFFFF" link="#002288" vlink="#444444" alink="#FF2200">
+<div align="center">
+<a name="top"></a>
+<!-- upper -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="150">
+<a href="index.htm"><img src="../img/csl.png" width="97" height="56" border="0"></a>
+</td>
+<td width="300%" align="center" valign="bottom">
+<h1>rexMatch</h1>
+</td>
+<td width="150" align="right">
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td nowrap align="right" valign="top"><font size="-2"><b>
+C&nbsp;Scripting&nbsp;Language<br>
+Reference&nbsp;Manual<br>
+Version&nbsp;4.4.0<br></b>
+<br>&lt;&lt;&nbsp;<a href="rex5.htm">Back</a>&nbsp;&nbsp;<a href="#end">End</a>&nbsp;&nbsp;<a href="rex7.htm">Next</a>&nbsp;&gt;&gt;<br>
+</font>
+</td></tr>
+</table>
+</td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- left column -->
+<tr valign="top">
+<td></td>
+<td>&nbsp;</td>
+<td bgcolor="#E0E0E0" width="150">
+<table cellspacing="0" cellpadding="2" border="0" width="100%">
+<tr>
+<td nowrap bgcolor="#0044AA"><b><font color="#FFFFFF">INDEX</font></b></td>
+</tr>
+<tr>
+<td nowrap><font size="-1">
+<a href="intro1.htm">Introduction</a><br>
+<a href="inst1.htm">Installation</a><br>
+<a href="using1.htm">Using the CSL executive</a><br>
+<a href="lang1.htm">Language</a><br>
+<a href="direct1.htm">Directives</a><br>
+<a href="sys1.htm">System library</a><br>
+<a href="str1.htm">String library</a><br>
+<a href="math1.htm">Math library</a><br>
+<a href="rex1.htm">Regular expression lib.</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex2.htm">Basic matching rules</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex3.htm">Additional syntax specs</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex4.htm">Order of precedence</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex5.htm">rexClose</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex6.htm">rexMatch</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex7.htm">rexOpen</a><br>
+&nbsp;&nbsp;&nbsp;<a href="rex8.htm">Sample</a><br>
+<a href="file1.htm">File library</a><br>
+<a href="dax1.htm">Database library</a><br>
+<a href="comm1.htm">Async Communication</a><br>
+<a href="prf1.htm">Registry/Profile handling</a><br>
+<a href="win1.htm">Windows control</a><br>
+<a href="capi1.htm">C API</a><br>
+<a href="api1.htm">C++ Class Interface</a><br>
+<a href="link1.htm">CSL links</a><br>
+</font></td>
+</tr>
+</table>
+</td>
+<!-- main column -->
+<td>&nbsp;&nbsp;</td>
+<td width="300%">
+<pre>
+rexMatch(             // compile regular expression
+   const handle,         // rex handle
+   const string,         // string to match
+   const nmatch,         // # of matches to find
+   var &amp;match[][],       // index &amp; length of every match
+  [const flags]);        // match flags
+</pre><p>
+Compares the <i>string</i> against the compiled regular expression represented
+by <i>handle</i> to find a match between the two.
+</p><p>
+<i>nmatch</i> is the number of substrings in <i>string</i> that <i>rexMatch</i>
+should try to match with subexpressions in <i>handle</i>. The array you supply
+for <i>match</i> must have at least <i>nmatch</i> by 2 elements.
+</p><p>
+<i>rexMatch</i> fills in the elements of the array <i>match</i> with the starting
+index and the length of the matched substrings. The zeroth element of the array
+corresponds to the entire pattern. If there are more than <i>nmatch</i> subexpressions,
+only the first nmatch - 1 are stored.
+</p><p>
+If <i>nmatch</i> is 0, or if the <i>rexOpenNosubreps</i> flag was set when <i>handle</i>
+was created with <i>rexOpen</i>, <i>rexMatch</i> ignores the <i>match</i> argument
+and only returns 0 or 1 indicating if a match was found.
+</p><p>
+<i>flags</i> defines customizable behavior of <i>rexMatch</i>:
+</p><p>
+<table border="0" cellpadding="3" cellspacing="0">
+ <tr bgcolor="#0044AA" valign="top">
+  <td><font color="#FFFFFF"><b>Flag</b></font></td>
+  <td bgcolor="#0034AA"><font color="#FFFFFF"><b>Description</b></font></td>
+ </tr>
+ <tr bgcolor="#C0E0FF" valign="top">
+  <td>rexMatchNotbol</td>
+  <td bgcolor="#B0D0FF">
+   Indicates that the first character of string is not the beginning of line.
+  </td>
+ </tr>
+ <tr bgcolor="#E0F0FF" valign="top">
+  <td>rexMatchNoteol</td>
+  <td bgcolor="#D0E0FF">
+   Indicates that the last character of string is not the end of line.
+  </td>
+ </tr>
+</table>
+</p><p>
+When a basic or extended regular expression is matched, any given parenthesized
+subexpression of the original pattern could participate in the match of several
+different substrings of string. The following rules determine which substrings are
+reported in pmatch:
+</p>
+<ol start="1" type="1">
+ <li>If a subexpression participated in a match several times, <i>rexMatch</i>
+     stores index and length of the last matching substring in <i>match</i>.<br><br>
+ <li>If a subexpression did not match in the source string, the number of matches
+     returned is less than <i>nmatch</i>.<br><br>
+ <li>If a subexpression contains subexpressions, the data in <i>match</i> refers
+     to the last such subexpression.
+</ol>
+<p>
+If the <i>rexOpenNosubreps</i> flag was set when <i>handle</i> was created by
+<i>rexOpen</i>, the contents of <i>match</i> are unspecified. If the
+<i>rexOpenNewline</i> flag was <u>not</u> set when <i>handle</i> was created,
+new-line characters will not be treated as end-of-line.
+</p>
+<p><font size="+2"><b>Return value</b></font></p>
+<p>
+If a match is found, <i>rexMatch</i> returns the number of matches including subreports.
+If no match is found <i>rexMatch</i> returns O.
+</p>
+
+</td>
+</tr>
+<!-- space -->
+<tr>
+<td colspan="9"><img src="../img/1pix.png" width="1" height="1" vspace="4"></td>
+</tr>
+<!-- fine line  -->
+<tr valign="bottom">
+<td></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="150" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="10" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="300%" bgcolor="#0044AA"><img src="../img/1pix.png" width="1" height="1"></td>
+<td width="5"><img src="../img/1pix.png" width="1" height="1"></td>
+<td></td>
+</tr>
+</table>
+<!-- lower line -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+<td></td>
+<td width="5">&nbsp;</td>
+<td width="25%">
+<font size="-2">Copyright &copy; <A HREF="http://ibk-software.ch">IBK Landquart</font></td>
+<td width="50%" align="center">
+<font size="-2">Last revision: 27.05.2002
+</font></td>
+<td width="25%" align="right">
+<font size="-2">&lt;&lt; <a href="rex5.htm">Back</a>&nbsp;&nbsp;<a href="#top">Top</a>&nbsp;&nbsp;<a href="rex7.htm">Next</a> &gt;&gt;</font></td>
+<td width="5">&nbsp;</td>
+<td></td>
+</tr>
+</table></div>
+<a name="end"></a>
+</body></html>
